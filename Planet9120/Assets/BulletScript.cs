@@ -8,17 +8,27 @@ public class BulletScript : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    public void OntriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        switch(other.gameObject.tag)
+        if (other.gameObject.CompareTag("Resource"))
+        {  
+            Destroy(gameObject);
+        }
+        if (other.gameObject.CompareTag("Oxygen"))
         {
-            case "Wall":
             Destroy(gameObject);
-            break;
-            case "Enemy":
-            //other.GameObject.GetComponent<MyEnemyScript>().TakeDamage();
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
             Destroy(gameObject);
-            break;
+        }
+        if (other.gameObject.CompareTag("Ship"))
+        {
+            Destroy(gameObject);
+        }
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
         }
     }
 
