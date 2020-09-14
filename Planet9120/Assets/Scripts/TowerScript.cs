@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TowerScript: MonoBehaviour
+public class TowerScript : MonoBehaviour
 {
     public float Range;
     public Transform Target;
@@ -27,7 +27,7 @@ public class TowerScript: MonoBehaviour
         RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
         if (rayInfo)
         {
-            if (rayInfo.collider.gameObject.tag == "Player")
+            if (rayInfo.collider.gameObject.tag == "Enemy")
             {
                 if (Detected == false)
                 {

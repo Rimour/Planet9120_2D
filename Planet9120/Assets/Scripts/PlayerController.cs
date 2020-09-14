@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
            // Debug.Log("Q key was pressed.");
             SpawnOxygenTower();
         //PlayerWins
-        if (ShipResources == 3)
+        if (ShipResources == 15)
         {
             Debug.Log("Player Wins!");
         }
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
        if (other.gameObject.CompareTag("Resource"))
         {
-            Resources++;
+            Resources += 5;
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Oxygen"))
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E ) && Resources >=2)
         {
             //Debug.Log("E key was pressed.");
-            Resources -= 2;
+            Resources -= 5;
             GameObject projectile = Instantiate(AttackTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && Resources >= 2)
         {
             //Debug.Log("Q key was pressed.");
-            Resources -= 2;
+            Resources -= 5;
             GameObject projectile = Instantiate(OxygenTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
