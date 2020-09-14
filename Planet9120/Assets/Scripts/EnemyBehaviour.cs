@@ -7,15 +7,24 @@ public class EnemyBehaviour : MonoBehaviour
     Transform Ship;
     Transform Player;
     //Transform []Towers;
+    public float MaxHP;
+    public float CurrentHP;
     public float Speed;
     public float PlayerRange;
     public float attackRange;
+    public float attackDamage;
 
     public void Start()
     {
+        CurrentHP = MaxHP;
         Ship = GameObject.FindWithTag("Ship").transform;
         Player = GameObject.FindWithTag("Player").transform;
         //Towers = GameObject.FindGameObjectsWithTag("Tower").transform;
+    }
+
+    public void takeDamage(float damage)
+    {
+        CurrentHP -= damage;
     }
    
     public void Update()
@@ -40,6 +49,11 @@ public class EnemyBehaviour : MonoBehaviour
                 //attack player animation
                 //deal damage to ship
             }
+        }
+
+        if(CurrentHP <= 0)
+        {
+            Destroy(this.gameObject);
         }
         
     }
