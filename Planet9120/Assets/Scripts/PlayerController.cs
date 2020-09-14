@@ -32,10 +32,10 @@ public class PlayerController : MonoBehaviour
         OxygenSystem();
         //Detect when the E arrow key is pressed down
         if (Input.GetKeyDown(KeyCode.E))
-            Debug.Log("E key was pressed.");
+          //  Debug.Log("E key was pressed.");
               SpawnTower();
         if (Input.GetKeyDown(KeyCode.Q))
-            Debug.Log("E key was pressed.");
+           // Debug.Log("Q key was pressed.");
             SpawnOxygenTower();
         //PlayerWins
         if (ShipResources == 3)
