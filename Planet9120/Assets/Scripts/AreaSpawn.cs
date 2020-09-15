@@ -8,7 +8,7 @@ public class AreaSpawn : MonoBehaviour
     int xPos;
     int zPos;
     int yPos;
-    int EnemyCount;
+    public int EnemyCount;
     public int MaxEnemyCount = 10;
     public int minXPos;
     public int maxXPos;
@@ -16,7 +16,8 @@ public class AreaSpawn : MonoBehaviour
     public int maxYPos;
     public int minZPos;
     public int maxZPos;
-    
+
+    bool runSpawning;
 
 
     void Start()
@@ -34,6 +35,15 @@ public class AreaSpawn : MonoBehaviour
             Instantiate(theEnemy, new Vector3(xPos, yPos, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
             EnemyCount += 1;
+        }
+    }
+
+    public void Update()
+    {
+        if(runSpawning == true)
+        {
+            StartCoroutine(EnemyDrop());
+
         }
     }
 }
