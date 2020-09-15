@@ -54,6 +54,7 @@ public class EnemyBehaviour : MonoBehaviour
         if(CurrentHP <= 0)
         {
             Destroy(this.gameObject);
+            //respawn
         }
         
     }
