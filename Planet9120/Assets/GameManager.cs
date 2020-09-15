@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
     public Text ResourceBox;
     public Text ShipResourceBox;
     float PlayerHealth;
+    float ShipFixed;
+    public float WinCondition = 100;
     public GameObject deathPanel;
+    public GameObject WinPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,11 @@ public class GameManager : MonoBehaviour
         {
             deathPanel.SetActive(true);
             //death
+        }
+        ShipFixed = PlayerScript.ShipResources;
+        if(ShipFixed >= WinCondition)
+        {
+            WinPanel.SetActive(true);
         }
     }
 }
