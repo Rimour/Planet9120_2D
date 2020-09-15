@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
     {
        if (other.gameObject.CompareTag("Resource"))
         {
-            Resources += 5;
+            Resources += 15;
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Oxygen"))
@@ -87,8 +87,9 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("Q key was pressed.");
                 ShipResources += Resources;
                 Resources = 0;
-                //GameObject projectile = Instantiate(AttackTower, TowerPlacement.position, TowerPlacement.rotation);
-           // }
+                Oxygen = 100;
+            //GameObject projectile = Instantiate(AttackTower, TowerPlacement.position, TowerPlacement.rotation);
+            // }
         }
     }
 
