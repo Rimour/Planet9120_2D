@@ -14,13 +14,9 @@ public class EnemyBehaviour : MonoBehaviour
     public float attackRange;
     public float attackDamage;
 
-    AreaSpawn SpawnScript;
-    int TrackEnemyCount;
 
     public void Start()
     {
-        SpawnScript = GameObject.FindWithTag("GameManager").GetComponent<AreaSpawn>();
-        TrackEnemyCount = SpawnScript.EnemyCount;
         CurrentHP = MaxHP;
         Ship = GameObject.FindWithTag("Ship").transform;
         Player = GameObject.FindWithTag("Player").transform;
@@ -58,7 +54,6 @@ public class EnemyBehaviour : MonoBehaviour
 
         if(CurrentHP <= 0)
         {
-            TrackEnemyCount -= 1;
             Destroy(this.gameObject);
             
             

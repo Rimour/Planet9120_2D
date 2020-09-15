@@ -17,7 +17,7 @@ public class AreaSpawn : MonoBehaviour
     public int minZPos;
     public int maxZPos;
 
-    bool runSpawning;
+    //bool runSpawning;
 
 
     void Start()
@@ -40,10 +40,10 @@ public class AreaSpawn : MonoBehaviour
 
     public void Update()
     {
-        if(runSpawning == true)
-        {
-            StartCoroutine(EnemyDrop());
+        //if(runSpawning == true)
+        //{
+           // StartCoroutine(EnemyDrop());
 
-        }
+       // }
     }
 }

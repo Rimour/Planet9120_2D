@@ -11,6 +11,7 @@ TagManager:
   - Ship
   - AttackTower
   - Bullet
+  - GameManager
   layers:
   - Default
   - TransparentFX
