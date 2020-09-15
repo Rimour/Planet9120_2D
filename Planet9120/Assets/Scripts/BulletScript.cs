@@ -5,8 +5,18 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
 
-
+    public float damageTo;
     public Rigidbody2D rb;
+
+    GameObject EnemyTarget;
+    EnemyBehaviour EnemyHealth;
+    
+
+    public void Start()
+    {
+        EnemyTarget = GameObject.FindWithTag("Enemy");
+        EnemyHealth = EnemyTarget.GetComponent<EnemyBehaviour>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,6 +30,7 @@ public class BulletScript : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
+            EnemyHealth.takeDamage(damageTo);
             Destroy(gameObject);
         }
         if (other.gameObject.CompareTag("Ship"))

@@ -10,6 +10,7 @@ TagManager:
   - Oxygen
   - Ship
   - AttackTower
+  - Bullet
   layers:
   - Default
   - TransparentFX

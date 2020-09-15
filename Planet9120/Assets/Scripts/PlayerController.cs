@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,15 +19,30 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePosition;
 
     public float Health;
+    
     public float Resources;
     public float Oxygen;
+   
     public float ShipResources;
 
+    public Slider HPBar;
+    public Slider OxyBar;
+
     private const float coef = 5f;
+
+    public void Start()
+    {
+        HPBar.maxValue = Health;
+        OxyBar.maxValue = Oxygen;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        HPBar.value = Health;
+        OxyBar.value = Oxygen;
+
+
         // Processing Inputs
         ProcessInputs();
         OxygenSystem();
