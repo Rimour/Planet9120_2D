@@ -24,7 +24,13 @@ public class PlayerController : MonoBehaviour
     
     public float Resources;
     public float Oxygen;
-   
+
+    public float Ability1Cooldown;
+    public float Ability1UseTime;
+    public float Ability2Cooldown;
+    public float Ability2UseTime;
+
+
     public float ShipResources;
 
     public Slider HPBar;
@@ -52,6 +58,9 @@ public class PlayerController : MonoBehaviour
         SpawnTower2();
         SpawnOxygenTower();
         SpawnHealthTower();
+        Ability1();
+        Ability2();
+
         if (ShipResources == 15)
         {
             Debug.Log("Player Wins!");
@@ -145,7 +154,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Ability1()
+    {
+        //run
+        if (Input.GetKeyDown(KeyCode.Q) && Ability1Cooldown >= 10)
+        {
 
+            moveSpeed = 10;
+            Ability1UseTime += coef * Time.deltaTime;
+        }
+        if (Ability1UseTime == 5)
+        {
+            moveSpeed = 5;
+            Ability1Cooldown += coef * Time.deltaTime;
+        }
+    }
+    void Ability2()
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && Ability1Cooldown >= 10)
+            {
+
+                Debug.Log("Ability 2");
+                //     Ability2UseTime += coef * Time.deltaTime;
+            }
+            //  if (Ability2UseTime == 5)
+            //{
+            //  Ability2Cooldown += coef * Time.deltaTime;
+            //} //Fire Faster
+        }         
     void FixedUpdate()
     {
         // Physics Calculation

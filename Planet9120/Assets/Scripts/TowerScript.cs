@@ -13,6 +13,7 @@ public class TowerScript : MonoBehaviour
     float nextTimeToFire = 0;
     public Transform Shootpoint;
     public float Force;
+    public float Health;
 
     // Start is called before the first frame update
     void Start()
