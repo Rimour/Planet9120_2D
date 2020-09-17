@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TowerScript : MonoBehaviour
+
+public class LongRangeTower : MonoBehaviour
 {
     public float Range;
     public Transform Target;
@@ -21,10 +22,10 @@ public class TowerScript : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    { 
-            Vector2 targetPos = Target.position;
-            Direction = targetPos - (Vector2)transform.position;
-            Gun.transform.up = Direction;
+    {
+        Vector2 targetPos = Target.position;
+        Direction = targetPos - (Vector2)transform.position;
+        Gun.transform.up = Direction;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -36,7 +37,7 @@ public class TowerScript : MonoBehaviour
             shoot();
         }
     }
- 
+
     void shoot()
     {
         GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);

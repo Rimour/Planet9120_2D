@@ -12,6 +12,7 @@ TagManager:
   - AttackTower
   - Bullet
   - GameManager
+  - Health
   layers:
   - Default
   - TransparentFX
