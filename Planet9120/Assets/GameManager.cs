@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         Player = GameObject.FindWithTag("Player");
         PlayerScript = Player.GetComponent<PlayerController>();
         deathPanel.SetActive(false);
