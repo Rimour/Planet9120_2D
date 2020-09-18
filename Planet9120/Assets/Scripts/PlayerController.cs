@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public GameObject LongTower;
     public GameObject OxygenTower;
     public GameObject HealthTower;
+    public GameObject Mine;
     public Transform TowerPlacement;
 
     private Vector2 moveDirection;
@@ -175,12 +176,13 @@ public class PlayerController : MonoBehaviour
             {
 
                 Debug.Log("Ability 2");
-                //     Ability2UseTime += coef * Time.deltaTime;
+                GameObject projectile = Instantiate(Mine, TowerPlacement.position, TowerPlacement.rotation);
+                Ability2UseTime += coef * Time.deltaTime;
             }
-            //  if (Ability2UseTime == 5)
-            //{
-            //  Ability2Cooldown += coef * Time.deltaTime;
-            //} //Fire Faster
+             if (Ability2UseTime == 5)
+            {
+              Ability2Cooldown += coef * Time.deltaTime;
+            } 
         }         
     void FixedUpdate()
     {

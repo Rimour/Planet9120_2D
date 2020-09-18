@@ -13,6 +13,7 @@ TagManager:
   - Bullet
   - GameManager
   - Health
+  - Mine
   layers:
   - Default
   - TransparentFX

@@ -14,8 +14,8 @@ public class BulletScript : MonoBehaviour
 
     public void Start()
     {
-     //   EnemyTarget = GameObject.FindWithTag("Enemy");
-      //  EnemyHealth = EnemyTarget.GetComponent<EnemyBehaviour>();
+        EnemyTarget = GameObject.FindWithTag("Enemy");
+        EnemyHealth = EnemyTarget.GetComponent<EnemyBehaviour>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

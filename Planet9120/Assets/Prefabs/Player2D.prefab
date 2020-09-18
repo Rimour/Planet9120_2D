@@ -103,14 +103,22 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 9048647785552116684}
   weapon: {fileID: 9048647787234126322}
-  AttackTower: {fileID: 5961299694254556641, guid: a88333e35f36de244b237760e3ff00b9, type: 3}
+  AttackTower: {fileID: 3313409988568248500, guid: a88333e35f36de244b237760e3ff00b9, type: 3}
+  LongTower: {fileID: 2945316129715719090, guid: e79767301932ba34aa85a0bd34cc582c, type: 3}
   OxygenTower: {fileID: 286045382129044975, guid: 1f8b67e7e6c8511409eed400bdb4c751, type: 3}
   HealthTower: {fileID: 3623333336736564404, guid: e3442127cb11d6a409489239fe4e7401, type: 3}
+  Mine: {fileID: 1600299397324241065, guid: 42b6ae88a9c6ab54ba23eb59972d7617, type: 3}
   TowerPlacement: {fileID: 9048647785905108003}
   Health: 100
   Resources: 0
   Oxygen: 100
+  Ability1Cooldown: 0
+  Ability1UseTime: 0
+  Ability2Cooldown: 0
+  Ability2UseTime: 0
   ShipResources: 0
+  HPBar: {fileID: 0}
+  OxyBar: {fileID: 0}
 --- !u!50 &9048647785552116684
 Rigidbody2D:
   serializedVersion: 4
