@@ -4,8 +4,7 @@ using UnityEngine;
 public class TowerScript : MonoBehaviour
 {
     public float Range;
-    public Transform Target;
-    bool Detected = false;
+    Transform Enemy;
     Vector2 Direction;
     public GameObject Gun;
     public GameObject bullet;
@@ -18,26 +17,44 @@ public class TowerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Enemy = GameObject.FindWithTag("Enemy").transform;
     }
     // Update is called once per frame
     void Update()
     { 
-            Vector2 targetPos = Target.position;
-            Direction = targetPos - (Vector2)transform.position;
-            Gun.transform.up = Direction;
+        //float EnemyDist = Vector2.Distance(Enemy.position, transform.position);//distance between enemy & player
+    //    if (EnemyDist <= Range)// if enemy is within range of player
+     //   {
+
+     //       if (EnemyDist >= Range)
+   //           Direction = targetPos - (Vector2)transform.position;
+    //           Gun.transform.up = Direction;
+     //          shoot();
+               
+     //   }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+   public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.tag == "Enemy")
         {
-            Vector2 targetPos = Target.position;
+            Vector2 targetPos = Enemy.position;
             Direction = targetPos - (Vector2)transform.position;
             Gun.transform.up = Direction;
             shoot();
+            if (Enemy != null && !other.Alive)
+            {
+
+            }
         }
     }
- 
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Enemy = null;
+        }
+    }
+
     void shoot()
     {
         GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);

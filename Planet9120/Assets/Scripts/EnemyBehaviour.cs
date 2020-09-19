@@ -13,6 +13,10 @@ public class EnemyBehaviour : MonoBehaviour
     public float PlayerRange;
     public float attackRange;
     public float attackDamage;
+    public bool Alive
+    {
+        get { return CurrentHP > 0; }
+    }
 
 
     public void Start()
@@ -59,5 +63,12 @@ public class EnemyBehaviour : MonoBehaviour
             
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Mine"))
+        {
+            CurrentHP -= 25;
+        }
     }
 }

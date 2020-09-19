@@ -12,7 +12,7 @@ public class Mine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            EnemyHealth.takeDamage(damageTo);
+          //  EnemyHealth.takeDamage(damageTo);
             Destroy(gameObject);
         }
     }

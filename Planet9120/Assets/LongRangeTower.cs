@@ -5,7 +5,7 @@ using UnityEngine;
 public class LongRangeTower : MonoBehaviour
 {
     public float Range;
-    public Transform Target;
+    Transform Enemy;
     bool Detected = false;
     Vector2 Direction;
     public GameObject Gun;
@@ -18,26 +18,31 @@ public class LongRangeTower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       // if (Enemy == null GameObject.FindWithTag("Enemies"))
+      //  Enemy = GameObject.FindWithTag("Enemy").transform;
     }
     // Update is called once per frame
     void Update()
     {
-        Vector2 targetPos = Target.position;
-        Direction = targetPos - (Vector2)transform.position;
-        Gun.transform.up = Direction;
+
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Vector2 targetPos = Target.position;
+            Vector2 targetPos = Enemy.position;
             Direction = targetPos - (Vector2)transform.position;
             Gun.transform.up = Direction;
             shoot();
         }
     }
-
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Enemy = null;
+        }
+    }
     void shoot()
     {
         GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);

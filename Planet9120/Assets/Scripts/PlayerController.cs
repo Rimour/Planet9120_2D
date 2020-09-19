@@ -75,24 +75,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if (other.gameObject.CompareTag("Resource"))
+        if (other.gameObject.CompareTag("Resource"))
         {
             Resources += 15;
             Destroy(other.gameObject);
         }
-        if (other.gameObject.CompareTag("Oxygen"))
-        {
-            Oxygen = 100;
-        }
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Health -= 20;
-        }
-        if (other.gameObject.CompareTag("Health"))
-        {
-            Health = 100;
-        }
-        if (other.gameObject.CompareTag("Ship"))
+    }
+        private void OnTriggerStay2D(Collider2D other)
+        {    
+            if (other.gameObject.CompareTag("Oxygen"))
+            {
+                Oxygen = 100;
+            }
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Health -= 20;
+            }
+            if (other.gameObject.CompareTag("Health"))
+            {
+                Health = 100;
+            }
+            if (other.gameObject.CompareTag("Ship"))
         {
            // if (Input.GetKeyDown(KeyCode.Q))
             //{
