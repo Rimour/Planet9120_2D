@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1427482242429736767}
   - component: {fileID: 1427482242429736736}
   - component: {fileID: 1427482242429736737}
+  - component: {fileID: -3614493417144635699}
   m_Layer: 0
   m_Name: Ore_Red
   m_TagString: Resource
@@ -109,3 +110,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &-3614493417144635699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427482242429736738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a889193c9e0c6a4e8d4ce97589c6a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceGained: 5
+  RespawnTime: 5

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     float PlayerHealth;
     float ShipFixed;
     public float WinCondition = 100;
+    
     [Header("UI")]
     public Text ResourceBox;
     public Text ShipResourceBox;
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour
         ResourceBox.text = PlayerScript.Resources.ToString();
         ShipResourceBox.text = PlayerScript.ShipResources.ToString() + " / " + WinCondition.ToString();
 
+       
+
         PlayerHealth = PlayerScript.Health;
         if(PlayerHealth <= 0)
         {
@@ -77,4 +80,6 @@ public class GameManager : MonoBehaviour
             ResumeGame();
         }
     }
+
+    
 }

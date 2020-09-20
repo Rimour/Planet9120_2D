@@ -8,16 +8,7 @@ public class BulletScript : MonoBehaviour
     public float damageTo;
     public Rigidbody2D rb;
 
-    GameObject EnemyTarget;
-    EnemyBehaviour EnemyHealth;
-    
-
-    public void Start()
-    {
-        EnemyTarget = GameObject.FindWithTag("Enemy");
-        EnemyHealth = EnemyTarget.GetComponent<EnemyBehaviour>();
-    }
-
+   
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Resource"))
@@ -30,8 +21,9 @@ public class BulletScript : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
+            EnemyBehaviour EnemyHealth = other.GetComponent<EnemyBehaviour>();
             EnemyHealth.takeDamage(damageTo);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         if (other.gameObject.CompareTag("Ship"))
         {
