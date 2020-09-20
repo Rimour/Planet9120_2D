@@ -58,6 +58,7 @@ public class EnemyBehaviour : MonoBehaviour
         if(CurrentHP <= 0)
         {
             Alive = false;
+            SoundManager.PlaySound("EnemyDeath");
             Destroy(this.gameObject);
             
             

@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    public float Health;
+    public float Health = 100;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Health <= 0)
+        {
+            Debug.Log("Player Loses");
+        }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Health -= 10;
+            Health -= Time.deltaTime;
         }
     }
 }
