@@ -103,8 +103,8 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 9048647785552116684}
   weapon: {fileID: 9048647787234126322}
-  AttackTower: {fileID: 3313409988568248500, guid: a88333e35f36de244b237760e3ff00b9, type: 3}
-  LongTower: {fileID: 2945316129715719090, guid: e79767301932ba34aa85a0bd34cc582c, type: 3}
+  AttackTower: {fileID: 6473245623681830857, guid: a88333e35f36de244b237760e3ff00b9, type: 3}
+  LongTower: {fileID: 5870291516749482741, guid: e79767301932ba34aa85a0bd34cc582c, type: 3}
   OxygenTower: {fileID: 286045382129044975, guid: 1f8b67e7e6c8511409eed400bdb4c751, type: 3}
   HealthTower: {fileID: 3623333336736564404, guid: e3442127cb11d6a409489239fe4e7401, type: 3}
   Mine: {fileID: 1600299397324241065, guid: 42b6ae88a9c6ab54ba23eb59972d7617, type: 3}

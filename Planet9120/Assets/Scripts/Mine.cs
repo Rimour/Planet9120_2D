@@ -12,7 +12,8 @@ public class Mine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-          //  EnemyHealth.takeDamage(damageTo);
+            //  EnemyHealth.takeDamage(damageTo);
+            SoundManager.PlaySound("Mine");
             Destroy(gameObject);
         }
     }

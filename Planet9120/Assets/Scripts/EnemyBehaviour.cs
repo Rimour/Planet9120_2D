@@ -13,14 +13,13 @@ public class EnemyBehaviour : MonoBehaviour
     public float PlayerRange;
     public float attackRange;
     public float attackDamage;
-    public bool Alive
-    {
-        get { return CurrentHP > 0; }
-    }
+    public bool Alive;
+
 
 
     public void Start()
     {
+        Alive = true;
         CurrentHP = MaxHP;
         Ship = GameObject.FindWithTag("Ship").transform;
         Player = GameObject.FindWithTag("Player").transform;
@@ -58,6 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if(CurrentHP <= 0)
         {
+            Alive = false;
             Destroy(this.gameObject);
             
             

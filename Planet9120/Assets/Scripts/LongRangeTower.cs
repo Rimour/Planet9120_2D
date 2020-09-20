@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TowerScript : MonoBehaviour
+
+public class LongRangeTower : MonoBehaviour
 {
     public float Range;
     private EnemyBehaviour target;
@@ -11,7 +12,7 @@ public class TowerScript : MonoBehaviour
     public GameObject bullet;
     private bool CanAttack = true;
     private float attackTimer;
-    private float cooldown = 2;
+    private float cooldown = 3;
     public float FireRate;
     float nextTimeToFire = 0;
     public Transform Shootpoint;
@@ -21,15 +22,15 @@ public class TowerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
     // Update is called once per frame
     void Update()
     {
         shoot();
-        Debug.Log(target);
+       // Debug.Log(target);
     }
-   public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
         {
@@ -61,7 +62,7 @@ public class TowerScript : MonoBehaviour
         if (target == null && enemy.Count > 0)
         {
             target = enemy.Dequeue();
-           
+
         }
         if (target != null && target.Alive)
         {
@@ -73,10 +74,9 @@ public class TowerScript : MonoBehaviour
                 Gun.transform.up = Direction;
                 GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
                 BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
-                SoundManager.PlaySound("TowerShoot");
                 CanAttack = false;
             }
-         
+
         }
     }
     private void OnDrawGizmosSelected()

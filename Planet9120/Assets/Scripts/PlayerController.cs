@@ -26,11 +26,9 @@ public class PlayerController : MonoBehaviour
     public float Resources;
     public float Oxygen;
 
-    public float Ability1Cooldown;
-    public float Ability1UseTime;
-    public float Ability2Cooldown;
-    public float Ability2UseTime;
-
+    public float Ability1Cooldown = 0;
+    public float Ability1UseTime = 0;
+    public float Ability2Cooldown = 0;
 
     public float ShipResources;
 
@@ -51,6 +49,9 @@ public class PlayerController : MonoBehaviour
         HPBar.value = Health;
         OxyBar.value = Oxygen;
 
+        Ability2Cooldown += Time.deltaTime;
+        Ability1Cooldown += Time.deltaTime;
+        Ability1UseTime += Time.deltaTime;
 
         // Processing Inputs
         ProcessInputs();
@@ -62,15 +63,11 @@ public class PlayerController : MonoBehaviour
         Ability1();
         Ability2();
 
-        if (ShipResources == 15)
+        if (Ability1UseTime >= 3)
         {
-            Debug.Log("Player Wins!");
+            moveSpeed = 5;
         }
-        //Player Dies
-        if (Health <= 0)
-        {
-            Debug.Log("Player Died!");
-        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -78,6 +75,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Resource"))
         {
             Resources += 15;
+            SoundManager.PlaySound("Resource");
             Destroy(other.gameObject);
         }
     }
@@ -97,14 +95,11 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Ship"))
         {
-           // if (Input.GetKeyDown(KeyCode.Q))
-            //{
-                //Debug.Log("Q key was pressed.");
                 ShipResources += Resources;
                 Resources = 0;
                 Oxygen = 100;
-            //GameObject projectile = Instantiate(AttackTower, TowerPlacement.position, TowerPlacement.rotation);
-            // }
+               // SoundManager.PlaySound("ShipFix");
+
         }
     }
 
@@ -114,6 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("E key was pressed.");
             Resources -= 10;
+            SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(AttackTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
@@ -123,6 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("E key was pressed.");
             Resources -= 10;
+            SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(LongTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
@@ -133,6 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Q key was pressed.");
             Resources -= 5;
+            SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(OxygenTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
@@ -143,6 +141,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Q key was pressed.");
             Resources -= 10;
+            SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(HealthTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
@@ -161,32 +160,27 @@ public class PlayerController : MonoBehaviour
     void Ability1()
     {
         //run
-        if (Input.GetKeyDown(KeyCode.Q) && Ability1Cooldown >= 10)
+        if (Input.GetKeyDown(KeyCode.Q) && Ability1Cooldown >= 5)
         {
-
-            moveSpeed = 10;
-            Ability1UseTime += coef * Time.deltaTime;
-        }
-        if (Ability1UseTime == 5)
-        {
-            moveSpeed = 5;
-            Ability1Cooldown += coef * Time.deltaTime;
+                moveSpeed = 10;
+                Ability1Cooldown = 0;
+                Ability1UseTime = 0;
+           
         }
     }
     void Ability2()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.Q) && Ability1Cooldown >= 10)
+            if (Ability2Cooldown >= 5)
             {
-
-                Debug.Log("Ability 2");
+               // Debug.Log("Ability 2");
                 GameObject projectile = Instantiate(Mine, TowerPlacement.position, TowerPlacement.rotation);
-                Ability2UseTime += coef * Time.deltaTime;
-            }
-             if (Ability2UseTime == 5)
-            {
-              Ability2Cooldown += coef * Time.deltaTime;
-            } 
-        }         
+                Ability2Cooldown = 0;
+            }       
+        }
+    }
+             
     void FixedUpdate()
     {
         // Physics Calculation

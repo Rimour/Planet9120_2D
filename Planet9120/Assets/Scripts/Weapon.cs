@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour
     {
         GameObject projectile = Instantiate(bullet, firePoint.position, firePoint.rotation);
         projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
+        SoundManager.PlaySound("Shoot");
     }
 
     // Start is called before the first frame update
