@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceSpawn : MonoBehaviour
 {
     public GameObject Resource;
+    public ColorType TypeOfColor;
     int Amount;
     public int MaxAmount;
     public float Range;
@@ -41,8 +42,34 @@ public class ResourceSpawn : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        if(TypeOfColor == ColorType.Blue)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else if(TypeOfColor == ColorType.Red)
+        {
+            Gizmos.color = Color.red;
+        }else if(TypeOfColor == ColorType.Yellow)
+        {
+            Gizmos.color = Color.yellow;
+        }else if (TypeOfColor == ColorType.Green)
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.white;
+        }
+        
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 
+}
+
+public enum ColorType
+{
+    Red,
+    Yellow,
+    Green,
+    Blue
 }

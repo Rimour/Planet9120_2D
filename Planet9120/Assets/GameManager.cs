@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public float WinCondition = 100;//amount needed to fix ship
     public int Count;
     public int ShipCount;
+
+    Ship ShipHP;
     
     [Header("UI")]
     public Text ResourceBox;
@@ -21,13 +23,17 @@ public class GameManager : MonoBehaviour
     public GameObject WinPanel;
     public GameObject PausePanel;
     bool isPaused;
+    public Slider ShipHPTracker;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         Time.timeScale = 1f;
+        ShipHP = GameObject.Find("Ship2d").GetComponent<Ship>();
         Player = GameObject.FindWithTag("Player");
         PlayerScript = Player.GetComponent<PlayerController>();
+        ShipHPTracker.maxValue = ShipHP.Health;
         deathPanel.SetActive(false);
         
     }
@@ -57,10 +63,10 @@ public class GameManager : MonoBehaviour
         ResourceBox.text = Count.ToString();
         ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
 
-       
+        ShipHPTracker.value = ShipHP.Health;
 
         PlayerHealth = PlayerScript.Health;
-        if(PlayerHealth <= 0)
+        if(PlayerHealth <= 0 || ShipHP.Health <= 0)
         {
             Time.timeScale = 0f;
             deathPanel.SetActive(true);
@@ -72,6 +78,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
             WinPanel.SetActive(true);
         }
+        
 
         if (Input.GetKeyDown(KeyCode.Space) && isPaused == false)
         {

@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Enemy"))
             {
-                Health -= 20;
+                Health -= 1;
             }
             if (other.gameObject.CompareTag("Health"))
             {
