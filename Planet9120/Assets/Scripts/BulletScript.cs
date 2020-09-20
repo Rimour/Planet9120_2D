@@ -8,7 +8,17 @@ public class BulletScript : MonoBehaviour
     public float damageTo;
     public Rigidbody2D rb;
 
-   
+    public void Start()
+    {
+        StartCoroutine(NoTarget());
+    }
+
+    IEnumerator NoTarget()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Resource"))
@@ -23,13 +33,17 @@ public class BulletScript : MonoBehaviour
         {
             EnemyBehaviour EnemyHealth = other.GetComponent<EnemyBehaviour>();
             EnemyHealth.takeDamage(damageTo);
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
         if (other.gameObject.CompareTag("Ship"))
         {
             Destroy(gameObject);
         }
         if (other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+        if (other.tag == "obstruction")
         {
             Destroy(gameObject);
         }

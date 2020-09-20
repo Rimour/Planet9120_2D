@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     GameObject Player;    
     float PlayerHealth;
     float ShipFixed;
-    public float WinCondition = 100;
+    public float WinCondition = 100;//amount needed to fix ship
+    public int Count;
+    public int ShipCount;
     
     [Header("UI")]
     public Text ResourceBox;
@@ -52,8 +54,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ResourceBox.text = PlayerScript.Resources.ToString();
-        ShipResourceBox.text = PlayerScript.ShipResources.ToString() + " / " + WinCondition.ToString();
+        ResourceBox.text = Count.ToString();
+        ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
 
        
 
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
             deathPanel.SetActive(true);
             //death
         }
-        ShipFixed = PlayerScript.ShipResources;
+        ShipFixed = Count;
         if(ShipFixed >= WinCondition)
         {
             Time.timeScale = 0f;

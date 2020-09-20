@@ -5,7 +5,13 @@ using UnityEngine;
 public class Resource : MonoBehaviour
 {
     public int ResourceGained;
-    public int RespawnTime;
+    public float RespawnTime;
+    GameManager Manager;
+
+    public void Start()
+    {
+        Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     IEnumerator Respawn()
     {
@@ -18,6 +24,7 @@ public class Resource : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            Manager.Count += ResourceGained;
             StartCoroutine(Respawn());
         }
 

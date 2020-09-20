@@ -37,10 +37,13 @@ public class PlayerController : MonoBehaviour
 
     private const float coef = 5f;
 
+    GameManager manager;//game manager
+
     public void Start()
     {
        HPBar.maxValue = Health;
        OxyBar.maxValue = Oxygen;
+       manager = GameObject.Find("GameManager").GetComponent<GameManager>();// set game manager
     }
 
     // Update is called once per frame
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Resource"))
         {
-            Resources += 15;
+            //Resources += 15;
             SoundManager.PlaySound("Resource");
             Destroy(other.gameObject);
         }
@@ -95,8 +98,10 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Ship"))
         {
-                ShipResources += Resources;
-                Resources = 0;
+                //ShipResources += Resources;
+            manager.ShipCount += manager.Count;
+            manager.Count = 0;
+                //Resources = 0;
                 Oxygen = 100;
                // SoundManager.PlaySound("ShipFix");
 
@@ -105,20 +110,20 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnTower()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && Resources >=10)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && manager.Count >=10)
         {
             //Debug.Log("E key was pressed.");
-            Resources -= 10;
+            manager.Count -= 10;
             SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(AttackTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
     public void SpawnTower2()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2) && Resources >= 10)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && manager.Count >= 10)
         {
             //Debug.Log("E key was pressed.");
-            Resources -= 10;
+            manager.Count -= 10;
             SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(LongTower, TowerPlacement.position, TowerPlacement.rotation);
         }
@@ -126,10 +131,10 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnOxygenTower()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3) && Resources >= 5)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && manager.Count >= 5)
         {
             //Debug.Log("Q key was pressed.");
-            Resources -= 5;
+            manager.Count -= 5;
             SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(OxygenTower, TowerPlacement.position, TowerPlacement.rotation);
         }
@@ -137,10 +142,10 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnHealthTower()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha4) && Resources >= 10)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && manager.Count >= 10)
         {
             //Debug.Log("Q key was pressed.");
-            Resources -= 10;
+            manager.Count -= 10;
             SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(HealthTower, TowerPlacement.position, TowerPlacement.rotation);
         }
