@@ -30,9 +30,9 @@ public abstract class TerrainTile : Tile{
     }
     public void UpdateDB(Object myAT , string name)
     {
-        AssetDatabase.CreateAsset(myAT, "Assets/Tiles/" + name + "");
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+        //AssetDatabase.CreateAsset(myAT, "Assets/Tiles/" + name + "");
+        //AssetDatabase.SaveAssets();
+        //AssetDatabase.Refresh();
 
     }
 
