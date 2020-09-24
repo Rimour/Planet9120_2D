@@ -12,8 +12,8 @@ public class LongRangeTower : MonoBehaviour
     public GameObject bullet;
     private bool CanAttack = true;
     private float attackTimer;
-    private float cooldown = 3;
-    public float FireRate;
+    private float cooldown = 1;
+    //public float FireRate;
     float nextTimeToFire = 0;
     public Transform Shootpoint;
     public float Force;

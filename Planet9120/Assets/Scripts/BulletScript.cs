@@ -35,10 +35,6 @@ public class BulletScript : MonoBehaviour
             EnemyHealth.takeDamage(damageTo);
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Ship"))
-        {
-            Destroy(gameObject);
-        }
         if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);

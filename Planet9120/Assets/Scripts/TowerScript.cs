@@ -11,8 +11,8 @@ public class TowerScript : MonoBehaviour
     public GameObject bullet;
     private bool CanAttack = true;
     private float attackTimer;
-    private float cooldown = 2;
-    public float FireRate;
+    private float cooldown = 1;
+    //public float FireRate;
     float nextTimeToFire = 0;
     public Transform Shootpoint;
     public float Force;
@@ -27,7 +27,7 @@ public class TowerScript : MonoBehaviour
     void Update()
     {
         shoot();
-        Debug.Log(target);
+       // Debug.Log(target);
     }
    public void OnTriggerEnter2D(Collider2D other)
     {

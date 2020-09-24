@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 6473245623383950303}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 6473245623681830860}
   m_RootOrder: 0
@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 6473245623681830862}
   - component: {fileID: 6473245623681830863}
   - component: {fileID: 6473245623681830856}
+  - component: {fileID: 3054624269837916536}
   m_Layer: 0
   m_Name: Tower2D
   m_TagString: AttackTower
@@ -212,9 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 0
-  Gun: {fileID: 6473245623366170013}
+  Gun: {fileID: 6473245623681830857}
   bullet: {fileID: 3257011916562872146, guid: b7817351d30e1014dbc2bc4cf6122de8, type: 3}
-  FireRate: 1
   Shootpoint: {fileID: 6473245623366170012}
   Force: 300
   Health: 100
@@ -225,7 +225,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6473245623681830857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -270,3 +270,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.40448406, y: 0.5499495}
   m_EdgeRadius: 0
+--- !u!58 &3054624269837916536
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6473245623681830857}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.011300325}
+  serializedVersion: 2
+  m_Radius: 1.4952617

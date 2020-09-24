@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 542058846321764339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4255701172809619636}
   m_RootOrder: 1
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1394645811373403742}
   - component: {fileID: 6212828496629568153}
   - component: {fileID: 950233606833959051}
+  - component: {fileID: 6618644662460220341}
   m_Layer: 0
   m_Name: LongRangeTower
   m_TagString: AttackTower
@@ -184,7 +185,6 @@ MonoBehaviour:
   Range: 5
   Gun: {fileID: 5870291516749482741}
   bullet: {fileID: 3257011916562872146, guid: b7817351d30e1014dbc2bc4cf6122de8, type: 3}
-  FireRate: 100
   Shootpoint: {fileID: 6852640914547385946}
   Force: 200
   Health: 0
@@ -195,7 +195,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5870291516749482741}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -240,6 +240,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.48121786, y: 0.42140043}
   m_EdgeRadius: 0
+--- !u!58 &6618644662460220341
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870291516749482741}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.00000023841858}
+  serializedVersion: 2
+  m_Radius: 2.4972804
 --- !u!1 &6476276472952101340
 GameObject:
   m_ObjectHideFlags: 0
