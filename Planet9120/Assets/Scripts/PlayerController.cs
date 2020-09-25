@@ -38,12 +38,38 @@ public class PlayerController : MonoBehaviour
     private const float coef = 5f;
 
     GameManager manager;//game manager
+    int CountdownTime1 = 5;
+    int CountdownTime2 = 5;
 
     public void Start()
     {
        HPBar.maxValue = Health;
        OxyBar.maxValue = Oxygen;
        manager = GameObject.Find("GameManager").GetComponent<GameManager>();// set game manager
+    }
+
+    IEnumerator Ability1Tracker()//starts 5 second countdown for ability 1
+    {
+        while (CountdownTime1 > 0)
+        {
+            manager.Ab1Text.text = CountdownTime1.ToString();
+            yield return new WaitForSeconds(1f);
+            CountdownTime1--;
+        }
+
+        manager.Ab1Text.text = " ";
+    }
+
+    IEnumerator Ability2Tracker()//starts 5 second countdown for ability 1
+    {
+        while (CountdownTime2 > 0)
+        {
+            manager.Ab2Text.text = CountdownTime2.ToString();
+            yield return new WaitForSeconds(1f);
+            CountdownTime2--;
+        }
+
+        manager.Ab2Text.text = " ";
     }
 
     // Update is called once per frame
@@ -90,7 +116,7 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Enemy"))
             {
-                Health -= 1;
+                Health -= 0.1f;
             }
             if (other.gameObject.CompareTag("Health"))
             {
@@ -170,7 +196,10 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = 10;
                 Ability1Cooldown = 0;
                 Ability1UseTime = 0;
-           
+                CountdownTime1 = 5;//sets start time for ability countdown
+                StartCoroutine(Ability1Tracker());//displays countdown for ability
+
+
         }
     }
     void Ability2()
@@ -182,6 +211,8 @@ public class PlayerController : MonoBehaviour
                // Debug.Log("Ability 2");
                 GameObject projectile = Instantiate(Mine, TowerPlacement.position, TowerPlacement.rotation);
                 Ability2Cooldown = 0;
+                CountdownTime2 = 5;//sets start time for ability countdown
+                StartCoroutine(Ability2Tracker());//displays countdown for ability
             }       
         }
     }

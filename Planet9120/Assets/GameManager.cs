@@ -8,22 +8,25 @@ public class GameManager : MonoBehaviour
 {
     PlayerController PlayerScript;
     GameObject Player;    
-    float PlayerHealth;
-    float ShipFixed;
+    float PlayerHealth;//player's health
+    
     public float WinCondition = 100;//amount needed to fix ship
-    public int Count;
-    public int ShipCount;
+    public int Count;//amount of resources collected by player
+    public int ShipCount;// amount of resources in ship
 
     Ship ShipHP;
     
     [Header("UI")]
     public Text ResourceBox;
-    public Text ShipResourceBox;
+    //public Text ShipResourceBox;
     public GameObject deathPanel;
     public GameObject WinPanel;
     public GameObject PausePanel;
     bool isPaused;
     public Slider ShipHPTracker;
+    public Slider ShipRepairTracker;
+    public Text Ab1Text;
+    public Text Ab2Text;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +37,8 @@ public class GameManager : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         PlayerScript = Player.GetComponent<PlayerController>();
         ShipHPTracker.maxValue = ShipHP.Health;
-        deathPanel.SetActive(false);
-        
+        ShipRepairTracker.maxValue = WinCondition;
+        deathPanel.SetActive(false);        
     }
     public void StartOver()
     {
@@ -56,24 +59,29 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
     }
+
+   
     
     // Update is called once per frame
     void Update()
     {
+       
         ResourceBox.text = Count.ToString();
-        ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
+        //ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
 
         ShipHPTracker.value = ShipHP.Health;
+        ShipRepairTracker.value = ShipCount;
 
         PlayerHealth = PlayerScript.Health;
-        if(PlayerHealth <= 0 || ShipHP.Health <= 0)
+        if(PlayerHealth <= 0 || ShipHP.Health <= 0)//lose conditions
         {
             Time.timeScale = 0f;
             deathPanel.SetActive(true);
+            Debug.Log("You lose");
             //death
         }
-        ShipFixed = Count;
-        if(ShipFixed >= WinCondition)
+        
+        if(ShipCount >= WinCondition)//win conditions 
         {
             Time.timeScale = 0f;
             WinPanel.SetActive(true);
