@@ -131,6 +131,8 @@ MonoBehaviour:
   attackRange: 1
   attackDamage: 5
   Alive: 0
+  BloodSplat: {fileID: 829479465436929832, guid: 46436f8684903a04a8e657f5e13d11b6, type: 3}
+  EnemyDeath: {fileID: 6875589282282975531}
 --- !u!61 &-8210589899704947651
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,8 +14,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float attackRange;
     public float attackDamage;
     public bool Alive;
-
-
+    public GameObject BloodSplat;
+    public Transform EnemyDeath;
 
     public void Start()
     {
@@ -59,6 +59,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Alive = false;
             SoundManager.PlaySound("EnemyDeath");
+            GameObject projectile = Instantiate(BloodSplat, EnemyDeath.position, EnemyDeath.rotation);
             Destroy(this.gameObject);
             
             
