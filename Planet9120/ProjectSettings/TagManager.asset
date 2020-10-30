@@ -15,6 +15,8 @@ TagManager:
   - Health
   - Mine
   - obstruction
+  - EnemyProjectile
+  - Acid
   layers:
   - Default
   - TransparentFX
