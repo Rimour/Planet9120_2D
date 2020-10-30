@@ -9,11 +9,43 @@ public class Weapon : MonoBehaviour
 
     public float fireForce;
 
+    public int bullets = 100000;
+    public bool bIsShooting = false;
+    public bool bisFiring = false;
+
     public void Fire()
     {
-        GameObject projectile = Instantiate(bullet, firePoint.position, firePoint.rotation);
-        projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
-        SoundManager.PlaySound("Shoot");
+        if (bIsShooting && !bisFiring)
+        {
+            bisFiring = true;
+            bullets--;
+            GameObject projectile = Instantiate(bullet, firePoint.position, firePoint.rotation);
+            projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
+            SoundManager.PlaySound("Shoot");
+        }
+        
+    }
+
+    public IEnumerator Firing()
+    {
+
+        if (!bisFiring && bIsShooting)
+        {
+            bisFiring = true;
+            bullets--;
+            GameObject projectile = Instantiate(bullet, firePoint.position, firePoint.rotation);
+            projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
+            SoundManager.PlaySound("Shoot");
+
+            yield return new WaitForSecondsRealtime(.3f);
+
+            bisFiring = false;
+            if (bIsShooting)
+            {
+                  StartCoroutine(Firing());             
+            }
+        }
+                  
     }
 
     // Start is called before the first frame update

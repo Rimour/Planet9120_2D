@@ -230,12 +230,25 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            weapon.Fire();
+            if (!weapon.bIsShooting)
+            {
+                weapon.bIsShooting = true;
+                StartCoroutine(weapon.Firing());
+               // weapon.Fire();
+            }
+
+            
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            weapon.bIsShooting = false;
         }
 
         moveDirection = new Vector2(moveX, moveY).normalized;
         mousePosition = sceneCamera.ScreenToWorldPoint(Input.mousePosition);
     }
+
 
     void Move()
     {
