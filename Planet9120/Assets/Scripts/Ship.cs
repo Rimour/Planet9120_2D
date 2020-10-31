@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    public float Health = 100;
+    public float Health = 30;
+
+    GameManager Manager;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -19,6 +21,8 @@ public class Ship : MonoBehaviour
         {
             Debug.Log("Player Loses");
         }
+
+        Manager.ShipCount = (int)Health;
     }
     private void OnTriggerStay2D(Collider2D other)
     {

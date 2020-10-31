@@ -41,11 +41,14 @@ public class PlayerController : MonoBehaviour
     int CountdownTime1 = 5;
     int CountdownTime2 = 5;
 
+    Ship ship;
+
     public void Start()
     {
        HPBar.maxValue = Health;
        OxyBar.maxValue = Oxygen;
        manager = GameObject.Find("GameManager").GetComponent<GameManager>();// set game manager
+       ship = GameObject.FindWithTag("Ship").GetComponent<Ship>();
     }
 
     IEnumerator Ability1Tracker()//starts 5 second countdown for ability 1
@@ -108,31 +111,34 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-        private void OnTriggerStay2D(Collider2D other)
-        {    
-            if (other.gameObject.CompareTag("Oxygen"))
-            {
-                Oxygen = 100;
-            }
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                Health -= 0.1f;
-            }
-            if (other.gameObject.CompareTag("Health"))
-            {
-                Health = 100;
-            }
-            if (other.gameObject.CompareTag("Ship"))
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Oxygen"))
         {
-                //ShipResources += Resources;
-            manager.ShipCount += manager.Count;
-            manager.Count = 0;
-                //Resources = 0;
-                Oxygen = 100;
-               // SoundManager.PlaySound("ShipFix");
-
+            Oxygen = 100;
         }
-    }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Health -= 0.1f;
+        }
+        if (other.gameObject.CompareTag("Health"))
+        {
+            Health = 100;
+        }
+        if (other.gameObject.CompareTag("Ship"))
+        {
+            //ShipResources += Resources;
+            //manager.ShipCount += manager.Count;
+            ship.Health += manager.Count;
+            manager.Count = 0;
+
+            //Resources = 0;
+            Oxygen = 100;
+            // SoundManager.PlaySound("ShipFix");
+        }
+
+    }           
+    
 
     public void SpawnTower()
     {
@@ -178,11 +184,11 @@ public class PlayerController : MonoBehaviour
     }
     void OxygenSystem()
     {
-        if (Oxygen >= 0) 
-        { 
-            Oxygen -= coef * Time.deltaTime;
-        }
-        else if (Oxygen <= 0)
+        //if (Oxygen >= 0) 
+        //{ 
+        //    Oxygen -= coef * Time.deltaTime;
+        //}
+         if (Oxygen <= 0)
         {
             Health -= coef * Time.deltaTime;
         }
