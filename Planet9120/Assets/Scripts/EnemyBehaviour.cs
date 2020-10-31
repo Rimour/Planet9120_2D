@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     public bool Alive;
     public GameObject BloodSplat;
     public Transform EnemyDeath;
-
+    Slider HPSlider;
 
     public void Start()
     {
@@ -25,8 +26,10 @@ public class EnemyBehaviour : MonoBehaviour
         Ship = GameObject.FindWithTag("Ship").transform;
         Player = GameObject.FindWithTag("Player").transform;
         //Towers = GameObject.FindGameObjectsWithTag("Tower").transform;
+        HPSlider = GetComponentInChildren<Slider>();
+        HPSlider.maxValue = MaxHP;
+        
     }
-
     public void takeDamage(float damage)
     {
         CurrentHP -= damage;
@@ -34,6 +37,7 @@ public class EnemyBehaviour : MonoBehaviour
    
     public void Update()
     {
+        HPSlider.value = CurrentHP;
         float MoveSpd = Speed * Time.deltaTime;//enemy movement speed
         float ShipDist = Vector2.Distance(Ship.position, transform.position);//distance between enemy & ship
         float PlayerDist = Vector2.Distance(Player.position, transform.position);//distance between enemy & player
