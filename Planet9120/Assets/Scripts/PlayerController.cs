@@ -121,6 +121,14 @@ public class PlayerController : MonoBehaviour
         {
             Health -= 0.1f;
         }
+        if (other.gameObject.CompareTag("Acid"))
+        {
+            Health -= 0.1f;
+        }
+        if (other.gameObject.CompareTag("EnemyProjectile"))
+        {
+            Health -= 10f;
+        }
         if (other.gameObject.CompareTag("Health"))
         {
             Health = 100;
