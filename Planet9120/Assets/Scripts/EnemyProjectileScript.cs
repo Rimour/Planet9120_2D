@@ -31,6 +31,10 @@ public class EnemyProjectileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
         if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
