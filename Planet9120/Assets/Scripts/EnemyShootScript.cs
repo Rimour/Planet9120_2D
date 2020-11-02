@@ -24,6 +24,9 @@ public class EnemyShootScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 targetPos = target.transform.position;
+        Direction = targetPos - (Vector2)transform.position;
+        Gun.transform.up = Direction;
         //shoot();
         //attackTimer += Time.deltaTime;
     }
@@ -37,17 +40,10 @@ public class EnemyShootScript : MonoBehaviour
 
     void shoot()
     {
-
-           // if (attackTimer >= cooldown)
-          //  {
-                Vector2 targetPos = target.transform.position;
-                Direction = targetPos - (Vector2)transform.position;
-                Gun.transform.up = Direction;
                 GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
                 BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
-                SoundManager.PlaySound("TowerShoot");
-                attackTimer = 0;
-         //   }
+               // SoundManager.PlaySound("TowerShoot");
+               // attackTimer = 0;
     }
     private void OnDrawGizmosSelected()
     {
