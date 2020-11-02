@@ -23,10 +23,14 @@ public class GameManager : MonoBehaviour
     public GameObject WinPanel;
     public GameObject PausePanel;
     bool isPaused;
+    public GameObject PauseButtons;
+    public GameObject SettingsPanel;
+    public GameObject ControlsPanel;
     public Slider ShipHPTracker;
     public Slider ShipRepairTracker;
-    public Text Ab1Text;
-    public Text Ab2Text;
+    [Header("Player Abilities")]
+    public Text Ab1Text;//ability 1 text slot
+    public Text Ab2Text;//ability 2 text slot
 
     // Start is called before the first frame update
     void Start()
@@ -49,15 +53,56 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         PausePanel.SetActive(true);
+        PausePanel.GetComponentInChildren<Text>().text = "Pause";
+        PauseButtons.SetActive(true);
         isPaused = true;
         Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
-        PausePanel.SetActive(false);
+        SettingsPanel.SetActive(false);
+        ControlsPanel.SetActive(false);
+        PausePanel.SetActive(false);        
         isPaused = false;
         Time.timeScale = 1f;
+    }
+
+    public void OpenSettings()//opens settings menu
+    {
+        PausePanel.GetComponentInChildren<Text>().text = "";
+        PauseButtons.SetActive(false);
+        SettingsPanel.SetActive(true);
+    }
+    public void CloseSettings()//Closes settings menu
+    {
+        PausePanel.GetComponentInChildren<Text>().text = "Pause";
+        PauseButtons.SetActive(true);
+        SettingsPanel.SetActive(false);
+    }
+    public void OpenControls()//opens controls menu
+    {
+        PausePanel.GetComponentInChildren<Text>().text = "";
+        PauseButtons.SetActive(false);
+        ControlsPanel.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        PausePanel.GetComponentInChildren<Text>().text = "Pause";
+        PauseButtons.SetActive(true);
+        ControlsPanel.SetActive(false);
+    }
+
+    public void GoToMain()//load main menu scene
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
+    public void ExitGame()// exits game
+    {
+        Application.Quit();
     }
 
    
