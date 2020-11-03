@@ -17,6 +17,7 @@ TagManager:
   - obstruction
   - EnemyProjectile
   - Acid
+  - AmmoTower
   layers:
   - Default
   - TransparentFX

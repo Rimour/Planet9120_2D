@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject OxygenTower;
     public GameObject HealthTower;
     public GameObject Mine;
+    public GameObject AmmoTower; //Ammo Tower ref
     public Transform TowerPlacement;
 
     private Vector2 moveDirection;
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour
         SpawnTower2();
         SpawnOxygenTower();
         SpawnHealthTower();
+        SpawnAmmoTower();
         Ability1();
         Ability2();
 
@@ -113,37 +115,82 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Oxygen"))
-        {
-            Oxygen = 100;
-        }
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Health -= 0.1f;
-        }
-        if (other.gameObject.CompareTag("Acid"))
-        {
-            Health -= 0.1f;
-        }
-        if (other.gameObject.CompareTag("EnemyProjectile"))
-        {
-            Health -= 10f;
-        }
-        if (other.gameObject.CompareTag("Health"))
-        {
-            Health = 100;
-        }
-        if (other.gameObject.CompareTag("Ship"))
-        {
-            //ShipResources += Resources;
-            //manager.ShipCount += manager.Count;
-            ship.Health += manager.Count;
-            manager.Count = 0;
+        string OtherTag = other.gameObject.tag;
 
-            //Resources = 0;
-            Oxygen = 100;
-            // SoundManager.PlaySound("ShipFix");
+        switch (OtherTag)
+        {
+            case "Oxygen":
+                Oxygen = 100;
+                break;
+
+            case "Enemy":
+                Health -= 0.1f;
+                break;
+
+            case "Acid":
+                Health -= 0.1f;
+                break;
+
+            case "EnemyProjectile":
+                Health -= 10f;
+                break;
+
+            case "Health":
+                Health = 100f;
+                break;
+
+            case "Ship":
+                //ShipResources += Resources;
+                //manager.ShipCount += manager.Count;
+                ship.Health += manager.Count;
+                manager.Count = 0;
+
+                //Resources = 0;
+                Oxygen = 100;
+                // SoundManager.PlaySound("ShipFix");
+                break;
+
+            case "AmmoTower":
+                weapon.bullets = 100;
+                break;
+
+            default:
+                Debug.Log("No tag matched");
+                break;
+
         }
+
+        //if (other.gameObject.CompareTag("Oxygen"))
+        //{
+        //    Oxygen = 100;
+        //}
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+        //    Health -= 0.1f;
+        //}
+        //if (other.gameObject.CompareTag("Acid"))
+        //{
+        //    Health -= 0.1f;
+        //}
+        //if (other.gameObject.CompareTag("EnemyProjectile"))
+        //{
+        //    Health -= 10f;
+        //}
+        //if (other.gameObject.CompareTag("Health"))
+        //{
+        //    Health = 100;
+        //}
+        //if (other.gameObject.CompareTag("Ship"))
+        //{
+        //    //ShipResources += Resources;
+        //    //manager.ShipCount += manager.Count;
+        //    ship.Health += manager.Count;
+        //    manager.Count = 0;
+
+        //    //Resources = 0;
+        //    Oxygen = 100;
+        //    // SoundManager.PlaySound("ShipFix");
+        //}
 
     }           
     
@@ -190,13 +237,25 @@ public class PlayerController : MonoBehaviour
             GameObject projectile = Instantiate(HealthTower, TowerPlacement.position, TowerPlacement.rotation);
         }
     }
+
+    public void SpawnAmmoTower()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha5) && manager.Count >= 1)
+        {
+            //Debug.Log("Q key was pressed.");
+            manager.Count -= 1;
+            SoundManager.PlaySound("PlaceTower");
+            GameObject projectile = Instantiate(AmmoTower, TowerPlacement.position, TowerPlacement.rotation);
+        }
+    }
+
     void OxygenSystem()
     {
-        //if (Oxygen >= 0) 
-        //{ 
-        //    Oxygen -= coef * Time.deltaTime;
-        //}
-         if (Oxygen <= 0)
+        if (Oxygen >= 0)
+        {
+            Oxygen -= coef * Time.deltaTime;
+        }
+        if (Oxygen <= 0)
         {
             Health -= coef * Time.deltaTime;
         }

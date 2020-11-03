@@ -13,11 +13,14 @@ public class GameManager : MonoBehaviour
     public float WinCondition = 100;//amount needed to fix ship
     public int Count;//amount of resources collected by player
     public int ShipCount;// amount of resources in ship
+    public int GoldResourceWin = 2; //amount of gold resource needed to win
+    public int GoldResourceCount = 0; //current amount of gold resource 
 
     Ship ShipHP;
     
     [Header("UI")]
     public Text ResourceBox;
+    public Text GoldResource;
     //public Text ShipResourceBox;
     public GameObject deathPanel;
     public GameObject WinPanel;
@@ -113,6 +116,7 @@ public class GameManager : MonoBehaviour
        
         ResourceBox.text = Count.ToString();
         //ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
+        GoldResource.text = GoldResourceCount.ToString() + "/2";
 
         ShipHPTracker.value = ShipHP.Health;
         ShipRepairTracker.value = ShipCount;
@@ -126,7 +130,7 @@ public class GameManager : MonoBehaviour
             //death
         }
         
-        if(ShipCount >= WinCondition)//win conditions 
+        if(ShipCount >= WinCondition && GoldResourceCount>= GoldResourceWin)//win conditions 
         {
             Time.timeScale = 0f;
             WinPanel.SetActive(true);

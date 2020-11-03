@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
     public float fireForce;
 
-    public int bullets = 100000;
+    public int bullets = 100;
     public bool bIsShooting = false;
     public bool bisFiring = false;
 
@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
     public IEnumerator Firing()
     {
 
-        if (!bisFiring && bIsShooting)
+        if (!bisFiring && bIsShooting && bullets > 0)
         {
             bisFiring = true;
             bullets--;

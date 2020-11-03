@@ -6,6 +6,7 @@ public class Resource : MonoBehaviour
 {
     public int ResourceGained;
     public float RespawnTime;
+    public bool bIsGold;
     GameManager Manager;
 
     public void Start()
@@ -24,8 +25,16 @@ public class Resource : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Manager.Count += ResourceGained;
-            StartCoroutine(Respawn());
+            if (!bIsGold)
+            {
+                Manager.Count += ResourceGained;
+                StartCoroutine(Respawn());
+            }
+
+            else
+            {
+                Manager.GoldResourceCount += ResourceGained;
+            }
         }
 
     }
