@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public int ShipCount;// amount of resources in ship
     public int GoldResourceWin = 2; //amount of gold resource needed to win
     public int GoldResourceCount = 0; //current amount of gold resource 
+    public float EnemiesKilled = 0; //How many enemies killed
+    public float TimeSurvived = 0; // How long the player survived
+    public float PlayerScore = 0; // How many points the player has
 
     Ship ShipHP;
     
@@ -34,6 +37,10 @@ public class GameManager : MonoBehaviour
     [Header("Player Abilities")]
     public Text Ab1Text;//ability 1 text slot
     public Text Ab2Text;//ability 2 text slot
+    [Header("Score System")]
+    public Text Enemieskilled;
+    public Text SurvivalTime;
+    public Text Score;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +52,7 @@ public class GameManager : MonoBehaviour
         PlayerScript = Player.GetComponent<PlayerController>();
         ShipHPTracker.maxValue = ShipHP.Health;
         ShipRepairTracker.maxValue = WinCondition;
-        deathPanel.SetActive(false);        
+        deathPanel.SetActive(false);
     }
     public void StartOver()
     {
@@ -120,6 +127,14 @@ public class GameManager : MonoBehaviour
 
         ShipHPTracker.value = ShipHP.Health;
         ShipRepairTracker.value = ShipCount;
+
+        TimeSurvived += Time.deltaTime;
+        SurvivalTime.text = Count.ToString();
+        Enemieskilled.text = Count.ToString();
+        Score.text = Count.ToString();
+        //SurvivalTime.Text = "Time Survived:" + TimeSurvived;
+       // Enemieskilled.Text = "Enemies Killed:" + EnemiesKilled;
+       // Score.Text = "Score:" + PlayerScore;
 
         PlayerHealth = PlayerScript.Health;
         if(PlayerHealth <= 0 || ShipHP.Health <= 0)//lose conditions

@@ -19,6 +19,8 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform EnemyDeath;
     Slider HPSlider;
 
+    GameManager manager;//game manager
+
     public void Start()
     {
         Alive = true;
@@ -28,7 +30,8 @@ public class EnemyBehaviour : MonoBehaviour
         //Towers = GameObject.FindGameObjectsWithTag("Tower").transform;
         HPSlider = GetComponentInChildren<Slider>();
         HPSlider.maxValue = MaxHP;
-        
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();// set game manager
+
     }
     public void takeDamage(float damage)
     {
@@ -63,6 +66,8 @@ public class EnemyBehaviour : MonoBehaviour
         if(CurrentHP <= 0)
         {
             Alive = false;
+            manager.PlayerScore += 10;
+            manager.EnemiesKilled += 1;
             SoundManager.PlaySound("EnemyDeath");
             GameObject projectile = Instantiate(BloodSplat, EnemyDeath.position, EnemyDeath.rotation);
             Destroy(this.gameObject);
