@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Text ResourceBox;
     public Text GoldResource;
     public Text AmmoCount;
+    public Texture2D cursorTexture;
     //public Text ShipResourceBox;
     public GameObject deathPanel;
     public GameObject WinPanel;
@@ -45,8 +46,7 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {       
         Time.timeScale = 1f;
         ShipHP = GameObject.Find("Ship2d").GetComponent<Ship>();
         Player = GameObject.FindWithTag("Player");
@@ -54,14 +54,15 @@ public class GameManager : MonoBehaviour
         ShipHPTracker.maxValue = ShipHP.Health;
         ShipRepairTracker.maxValue = WinCondition;
         deathPanel.SetActive(false);
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.ForceSoftware);
     }
-    public void StartOver()
+
+    public void StartOver()//restarts game scene
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
-
-    public void PauseGame()
+    public void PauseGame()//pauses game
     {
         PausePanel.SetActive(true);
         PausePanel.GetComponentInChildren<Text>().text = "Pause";
@@ -69,8 +70,7 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
     }
-
-    public void ResumeGame()
+    public void ResumeGame()//resumes game from pause
     {
         SettingsPanel.SetActive(false);
         ControlsPanel.SetActive(false);
@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
     }
-
     public void OpenSettings()//opens settings menu
     {
         PausePanel.GetComponentInChildren<Text>().text = "";
@@ -97,31 +96,25 @@ public class GameManager : MonoBehaviour
         PauseButtons.SetActive(false);
         ControlsPanel.SetActive(true);
     }
-
-    public void CloseControls()
+    public void CloseControls()//closes control panel
     {
         PausePanel.GetComponentInChildren<Text>().text = "Pause";
         PauseButtons.SetActive(true);
         ControlsPanel.SetActive(false);
     }
-
     public void GoToMain()//load main menu scene
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
-
     public void ExitGame()// exits game
     {
         Application.Quit();
     }
-
-   
     
-    // Update is called once per frame
+
     void Update()
-    {
-       
+    {      
         ResourceBox.text = Count.ToString();
         //ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
         GoldResource.text = GoldResourceCount.ToString() + "/2";
@@ -152,7 +145,6 @@ public class GameManager : MonoBehaviour
             WinPanel.SetActive(true);
         }
         
-
         if (Input.GetKeyDown(KeyCode.Space) && isPaused == false)
         {
             PauseGame();

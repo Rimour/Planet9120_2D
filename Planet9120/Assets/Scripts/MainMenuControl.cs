@@ -6,31 +6,30 @@ using UnityEngine.SceneManagement;
 public class MainMenuControl : MonoBehaviour
 {
     public GameObject background;
-    public GameObject PressSpaceText;
-    public GameObject CreditsPanel;
-    public GameObject SettingsPanel;
+    public GameObject PressSpaceText;//press space text
+    public GameObject CreditsPanel;//credits menu
+    public GameObject SettingsPanel;//settings menu
     bool spaceWasPressed;
 
-    public void PlayGameButton()
+    public void PlayGameButton()//load game scene
     {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
-    public void CreditsButton()
+    public void CreditsButton()//open credits menu
     {
         background.SetActive(false);
         CreditsPanel.SetActive(true);
     }
-    public void SettingsButton()
+    public void SettingsButton()//open settigns menu
     {
         SettingsPanel.SetActive(true);
         background.SetActive(false);
     }
-    public void QuitGameButton()
+    public void QuitGameButton()//exit game
     {
         Application.Quit();
     }
-
-    public void CloseMenus()
+    public void CloseMenus()//close game menus
     {
         spaceWasPressed = true;
         CreditsPanel.SetActive(false);

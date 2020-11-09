@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
-    public int ResourceGained;
-    public float RespawnTime;
+    public int ResourceGained;//amount of resources gained
+    public float RespawnTime;//Time before respawn
     public bool bIsGold;
     GameManager Manager;
 
@@ -19,7 +19,6 @@ public class Resource : MonoBehaviour
         this.gameObject.SetActive(false);
         yield return new WaitForSeconds(RespawnTime);
         this.gameObject.SetActive(true);
-
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
