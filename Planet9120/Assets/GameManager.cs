@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public Text ResourceBox;
     public Text GoldResource;
+    public Text AmmoCount;
     //public Text ShipResourceBox;
     public GameObject deathPanel;
     public GameObject WinPanel;

@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 3623333336736564402}
   - component: {fileID: 3623333336736564403}
   - component: {fileID: 3623333336736564401}
+  - component: {fileID: 4535070969648429281}
   m_Layer: 0
   m_Name: HealthTower
   m_TagString: Health
@@ -192,3 +193,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &4535070969648429281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623333336736564404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9e478a97158cb488a71ba1b75d7389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthLevel: 30

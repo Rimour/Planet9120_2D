@@ -108,6 +108,7 @@ MonoBehaviour:
   OxygenTower: {fileID: 286045382129044975, guid: 1f8b67e7e6c8511409eed400bdb4c751, type: 3}
   HealthTower: {fileID: 3623333336736564404, guid: e3442127cb11d6a409489239fe4e7401, type: 3}
   Mine: {fileID: 1600299397324241065, guid: 42b6ae88a9c6ab54ba23eb59972d7617, type: 3}
+  AmmoTower: {fileID: 0}
   TowerPlacement: {fileID: 9048647785905108003}
   Health: 100
   Resources: 0
@@ -115,7 +116,6 @@ MonoBehaviour:
   Ability1Cooldown: 0
   Ability1UseTime: 0
   Ability2Cooldown: 0
-  Ability2UseTime: 0
   ShipResources: 0
   HPBar: {fileID: 0}
   OxyBar: {fileID: 0}
@@ -153,7 +153,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.016422749, y: -0.008211315}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -164,7 +164,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 0.3608122, y: 0.33891582}
   m_EdgeRadius: 0
 --- !u!61 &9048647785552116686
 BoxCollider2D:
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00043988228, y: 0.006084174}
+  m_Offset: {x: 0.019030303, y: -0.008281082}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -190,7 +190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24021757, y: 0.3317188}
+  m_Size: {x: 0.20303673, y: 0.24214685}
   m_EdgeRadius: 0
 --- !u!1 &9048647785905108002
 GameObject:
@@ -321,3 +321,6 @@ MonoBehaviour:
   bullet: {fileID: 3257011916562872146, guid: b7817351d30e1014dbc2bc4cf6122de8, type: 3}
   firePoint: {fileID: 9048647785905108003}
   fireForce: 20
+  bullets: 100
+  bIsShooting: 0
+  bisFiring: 0

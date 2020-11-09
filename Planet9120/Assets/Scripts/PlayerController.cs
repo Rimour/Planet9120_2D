@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     public float Resources;
     public float Oxygen;
 
+    private bool bInOxygenArea;
+    private bool bAlreadyInOxygen;
+    private bool bInHealthArea;
+    private bool bAlreadyInHealth;
+
     public float Ability1Cooldown = 0;
     public float Ability1UseTime = 0;
     public float Ability2Cooldown = 0;
@@ -82,6 +87,8 @@ public class PlayerController : MonoBehaviour
         HPBar.value = Health;
         OxyBar.value = Oxygen;
 
+        manager.AmmoCount.text = weapon.bullets.ToString();
+
         Ability2Cooldown += Time.deltaTime;
         Ability1Cooldown += Time.deltaTime;
         Ability1UseTime += Time.deltaTime;
@@ -102,29 +109,115 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 5;
         }
 
+        //if (rb.IsTouching(GameObject.FindWithTag("Oxygen").GetComponent<Collider2D>()))
+        //{
+        //    Debug.Log("Is colliding with oxygen");
+        //}
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Resource"))
+        string OtherTag = other.gameObject.tag;
+
+
+        switch (OtherTag)
         {
-            //Resources += 15;
-            SoundManager.PlaySound("Resource");
-            Destroy(other.gameObject);
+
+            case "Resource":
+                //if (other.gameObject.CompareTag("Resource"))
+
+                //Resources += 15;
+                SoundManager.PlaySound("Resource");
+                Destroy(other.gameObject);
+
+                break;
+
+            case "Oxygen":
+
+                OxygenTowerBehavior OxygenRef = other.GetComponent<OxygenTowerBehavior>();
+                bInOxygenArea = true;
+                if (OxygenRef.oxygenLevel > 0)
+                {
+                    StartCoroutine(ReceivingOxygen(OxygenRef));
+                }
+                
+                break;
+
+            case "Ship":
+                //ShipResources += Resources;
+                //manager.ShipCount += manager.Count;
+                
+                ship.Health += manager.Count;
+                manager.Count = 0;
+
+                //Resources = 0;
+                bInOxygenArea = true;
+                if (ship.Oxygen > 0)
+                {
+                    StartCoroutine(ReceivingOxygenFromShip(ship));
+                }
+                // SoundManager.PlaySound("ShipFix");
+                break;
+
+            case "Health":
+
+                HealthTowerBehavior HealthRef = other.GetComponent<HealthTowerBehavior>();
+                bInHealthArea = true;
+                if (HealthRef.HealthLevel > 0)
+                {
+                    StartCoroutine(ReceivingHealth(HealthRef));
+                }
+
+                break;
+
         }
+
     }
-    private void OnTriggerStay2D(Collider2D other)
+
+    private void OnTriggerExit2D(Collider2D other)
     {
         string OtherTag = other.gameObject.tag;
+        Debug.Log(OtherTag);
 
         switch (OtherTag)
         {
             case "Oxygen":
-                Oxygen = 100;
+                OxygenTowerBehavior OxygenRef = other.GetComponent<OxygenTowerBehavior>();
+                bInOxygenArea = false;
+                Debug.Log("Left the oxygen area");
+                StopCoroutine(ReceivingOxygen(OxygenRef));
                 break;
+
+            case "Ship":
+                bInOxygenArea = false;
+                StopCoroutine(ReceivingOxygenFromShip(ship));
+                break;
+
+            case "Health":
+                HealthTowerBehavior HealthRef = other.GetComponent<HealthTowerBehavior>();
+                bInHealthArea = false;
+                StopCoroutine(ReceivingHealth(HealthRef));  
+                break;
+        }
+    }
+
+
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        string OtherTag = other.gameObject.tag;
+        
+
+        switch (OtherTag)
+        {
+            //case "Oxygen":
+            //    Oxygen = 100;
+            //    break;
 
             case "Enemy":
                 Health -= 0.1f;
+                moveSpeed = 0;
                 break;
 
             case "Acid":
@@ -135,27 +228,27 @@ public class PlayerController : MonoBehaviour
                 Health -= 10f;
                 break;
 
-            case "Health":
-                Health = 100f;
-                break;
+            //case "Health":
+            //    Health = 100f;
+            //    break;
 
-            case "Ship":
-                //ShipResources += Resources;
-                //manager.ShipCount += manager.Count;
-                ship.Health += manager.Count;
-                manager.Count = 0;
+            //case "Ship":
+            //    //ShipResources += Resources;
+            //    //manager.ShipCount += manager.Count;
+            //    ship.Health += manager.Count;
+            //    manager.Count = 0;
 
-                //Resources = 0;
-                Oxygen = 100;
-                // SoundManager.PlaySound("ShipFix");
-                break;
+            //    //Resources = 0;
+            //    Oxygen = 100;
+            //    // SoundManager.PlaySound("ShipFix");
+            //    break;
 
             case "AmmoTower":
-                weapon.bullets = 100;
+                weapon.bullets = 99;
                 break;
 
             default:
-                Debug.Log("No tag matched");
+                //Debug.Log("No tag matched");
                 break;
 
         }
@@ -192,8 +285,73 @@ public class PlayerController : MonoBehaviour
         //    // SoundManager.PlaySound("ShipFix");
         //}
 
-    }           
-    
+    }
+
+    public IEnumerator ReceivingHealth(HealthTowerBehavior TowerRef)
+    {
+        if (!bAlreadyInHealth)
+        {
+            bAlreadyInHealth = true;
+            Health = Mathf.Clamp(Health + 10, 0, 100);
+            TowerRef.HealthLevel = Mathf.Clamp(TowerRef.HealthLevel - 10, 0, 100);
+
+            yield return new WaitForSecondsRealtime(1f);
+            bAlreadyInHealth = false;
+            if ((bInHealthArea) && TowerRef.HealthLevel > 0)
+            {
+                StartCoroutine(ReceivingHealth(TowerRef));
+            }
+
+            yield return new WaitForSecondsRealtime(1f);
+            bAlreadyInHealth = false;
+
+        }
+
+    }
+    public IEnumerator ReceivingOxygen(OxygenTowerBehavior TowerRef)
+    {
+        if (!bAlreadyInOxygen)
+        {
+            bAlreadyInOxygen = true;
+            Oxygen = Mathf.Clamp(Oxygen + 10, 0, 100);    
+            TowerRef.oxygenLevel = Mathf.Clamp(TowerRef.oxygenLevel - 10, 0, 100);
+
+            yield return new WaitForSecondsRealtime(1f);
+            bAlreadyInOxygen = false;
+            if ((bInOxygenArea) && TowerRef.oxygenLevel > 0)
+            {
+                StartCoroutine(ReceivingOxygen(TowerRef));
+            }
+
+            yield return new WaitForSecondsRealtime(1f);
+            bAlreadyInOxygen = false;
+
+        }
+
+    }
+
+    public IEnumerator ReceivingOxygenFromShip(Ship ShipRef)
+    {
+        if (!bAlreadyInOxygen)
+        {
+            bAlreadyInOxygen = true;
+            Oxygen = Mathf.Clamp(Oxygen + 10, 0, 100);
+            ShipRef.Oxygen = Mathf.Clamp(ShipRef.Oxygen - 10, 0, 100);
+
+            yield return new WaitForSecondsRealtime(1f);
+            bAlreadyInOxygen = false;
+            if ((bInOxygenArea) && ShipRef.Oxygen > 0)
+            {
+                StartCoroutine(ReceivingOxygenFromShip(ShipRef));
+            }
+
+            yield return new WaitForSecondsRealtime(1f);
+            bAlreadyInOxygen = false;
+
+        }
+
+    }
+
 
     public void SpawnTower()
     {
@@ -251,6 +409,7 @@ public class PlayerController : MonoBehaviour
 
     void OxygenSystem()
     {
+
         if (Oxygen >= 0)
         {
             Oxygen -= coef * Time.deltaTime;

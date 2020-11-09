@@ -2,37 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class HealthTowerBehavior : MonoBehaviour
 {
-    public float Health = 30;
-    public float Oxygen = 200;
-
-    private bool bPlayerInRange;
-
-    GameManager Manager;
+    public float HealthLevel = 30;
+    private bool bPlayerInRange = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        StartCoroutine(RefillOxygen());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Health <= 0)
+
+    }
+
+    IEnumerator RefillOxygen()
+    {
+        if (!bPlayerInRange)
         {
-            Debug.Log("Player Loses");
+            HealthLevel = Mathf.Clamp(HealthLevel + 5, 0, 100);
+            Debug.Log("Oxygen tower went up");
         }
 
-        Manager.ShipCount = (int)Health;
-    }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Health -= Time.deltaTime;
-        }
+        //else
+        //{
+        //    oxygenLevel = Mathf.Clamp(oxygenLevel - 10, 0, 100);
+        //    Debug.Log("oxygen tower went down");
+        //    Debug.Log(oxygenLevel);
+        //}
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        StartCoroutine(RefillOxygen());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -56,17 +60,5 @@ public class Ship : MonoBehaviour
         {
             bPlayerInRange = false;
         }
-    }
-
-    IEnumerator RefillOxygen()
-    {
-        if (!bPlayerInRange)
-        {
-            Oxygen = Mathf.Clamp(Oxygen + 5, 0, 100);
-        }
-
-        yield return new WaitForSecondsRealtime(1f);
-
-        StartCoroutine(RefillOxygen());
     }
 }

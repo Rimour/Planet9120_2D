@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
     public float fireForce;
 
-    public int bullets = 100;
+    public int bullets = 99;
     public bool bIsShooting = false;
     public bool bisFiring = false;
 
