@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 4683081059949541954}
   - component: {fileID: 7916819776931704354}
   - component: {fileID: 8590087420761706161}
+  - component: {fileID: 8900665285683118454}
   m_Layer: 0
   m_Name: RangedSpider
   m_TagString: Enemy
@@ -514,6 +515,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &8900665285683118454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780885088903383781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e4d61bdc49fbb42a19e75fb414dfb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 3
+  target: {fileID: 9048647785552116683, guid: da5fb978d302d2742adf97ad496b9683, type: 3}
+  Gun: {fileID: 1213319994676861932}
+  Bullet: {fileID: 4707410807928552579, guid: 2e423aeea89bcbc468ac522afd574b5a, type: 3}
+  FireRate: 100
+  Shootpoint: {fileID: 5261402415414685894}
+  Force: 1000
 --- !u!1 &5008087071563871298
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,15 +573,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5008087071563871298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69e4d61bdc49fbb42a19e75fb414dfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 2
-  target: {fileID: 9048647785552116721, guid: da5fb978d302d2742adf97ad496b9683, type: 3}
+  target: {fileID: 9048647785552116683, guid: da5fb978d302d2742adf97ad496b9683, type: 3}
   Gun: {fileID: 1213319994676861932}
-  bullet: {fileID: 4707410807928552579, guid: 2e423aeea89bcbc468ac522afd574b5a, type: 3}
+  Bullet: {fileID: 4707410807928552579, guid: 2e423aeea89bcbc468ac522afd574b5a, type: 3}
+  FireRate: 1
   Shootpoint: {fileID: 5261402415414685894}
   Force: 100
 --- !u!58 &4651921419203429301

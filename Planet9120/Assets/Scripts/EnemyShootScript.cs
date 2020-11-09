@@ -1,20 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyShootScript : MonoBehaviour
 {
     public float Range;
     Vector2 Direction;
-    public GameObject target;
+    public Transform target;
+    bool Detected = false;
     public GameObject Gun;
-    public GameObject bullet;
-    private bool CanAttack = true;
-    private float attackTimer;
-    private float cooldown = 1;
+    public GameObject Bullet;
+    public float FireRate;
     float nextTimeToFire = 0;
     public Transform Shootpoint;
     public float Force;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +25,42 @@ public class EnemyShootScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 targetPos = target.transform.position;
+        Vector2 targetPos = target.position;
         Direction = targetPos - (Vector2)transform.position;
-        Gun.transform.up = Direction;
+        RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
+
+        if(rayInfo)
+        {
+            if(rayInfo.collider.gameObject.tag == "Player")
+            {
+                if(Detected == false)
+                {
+                    Detected = true;
+                }
+            }
+
+            else
+            {
+                {
+                    if (Detected == true)
+                    {
+                        Detected = false;
+                    }
+                }
+            }
+
+            if (Detected)
+            {
+                Gun.transform.up = Direction;
+
+                if(Time.time > nextTimeToFire)
+                {
+                    nextTimeToFire = Time.time + 1 / FireRate;
+                    shoot();
+                }
+            }
+
+        }
         //shoot();
         //attackTimer += Time.deltaTime;
     }
@@ -40,7 +74,7 @@ public class EnemyShootScript : MonoBehaviour
 
     void shoot()
     {
-                GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
+                GameObject BulletIns = Instantiate(Bullet, Shootpoint.position, Quaternion.identity);
                 BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
                // SoundManager.PlaySound("TowerShoot");
                // attackTimer = 0;

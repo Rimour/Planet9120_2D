@@ -171,6 +171,10 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
+            case "EnemyProjectile":
+                Health -= 10f;
+                break;
+
         }
 
     }
@@ -224,9 +228,9 @@ public class PlayerController : MonoBehaviour
                 Health -= 0.1f;
                 break;
 
-            case "EnemyProjectile":
-                Health -= 10f;
-                break;
+           // case "EnemyProjectile":
+          //      Health -= 10f;
+           //     break;
 
             //case "Health":
             //    Health = 100f;

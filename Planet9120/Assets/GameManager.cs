@@ -40,9 +40,13 @@ public class GameManager : MonoBehaviour
     public Text Ab1Text;//ability 1 text slot
     public Text Ab2Text;//ability 2 text slot
     [Header("Score System")]
-    public Text Enemieskilled;
-    public Text SurvivalTime;
     public Text Score;
+    public Text Enemieskilled_Lose;
+    public Text SurvivalTime_Lose;
+    public Text Score_Lose;
+    public Text Enemieskilled_Win;
+    public Text SurvivalTime_Win;
+    public Text Score_Win;
 
     // Start is called before the first frame update
     void Start()
@@ -123,12 +127,13 @@ public class GameManager : MonoBehaviour
         ShipRepairTracker.value = ShipCount;
 
         TimeSurvived += Time.deltaTime;
-        SurvivalTime.text = Count.ToString();
-        Enemieskilled.text = Count.ToString();
-        Score.text = Count.ToString();
-        //SurvivalTime.Text = "Time Survived:" + TimeSurvived;
-       // Enemieskilled.Text = "Enemies Killed:" + EnemiesKilled;
-       // Score.Text = "Score:" + PlayerScore;
+        SurvivalTime_Lose.text = TimeSurvived.ToString();
+        Enemieskilled_Lose.text = EnemiesKilled.ToString();
+        Score.text = PlayerScore.ToString();
+        SurvivalTime_Win.text = TimeSurvived.ToString();
+        Enemieskilled_Win.text = EnemiesKilled.ToString();
+        Score_Lose.text = PlayerScore.ToString();
+        Score_Win.text = PlayerScore.ToString();
 
         PlayerHealth = PlayerScript.Health;
         if(PlayerHealth <= 0 || ShipHP.Health <= 0)//lose conditions
