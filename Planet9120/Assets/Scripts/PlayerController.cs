@@ -222,10 +222,12 @@ public class PlayerController : MonoBehaviour
             case "Enemy":
                 Health -= 0.1f;
                 moveSpeed = 0;
+                manager.Multiplier = 1;
                 break;
 
             case "Acid":
                 Health -= 0.1f;
+                manager.Multiplier = 1;
                 break;
 
            // case "EnemyProjectile":

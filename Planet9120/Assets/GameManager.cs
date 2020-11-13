@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float EnemiesKilled = 0; //How many enemies killed
     public float TimeSurvived = 0; // How long the player survived
     public float PlayerScore = 0; // How many points the player has
+    public float Multiplier = 1; // How many points the player has
 
     Ship ShipHP;
     
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     public Text Enemieskilled_Win;
     public Text SurvivalTime_Win;
     public Text Score_Win;
+    public Text Multiplier_Text;
 
     // Start is called before the first frame update
     void Start()
@@ -134,6 +136,7 @@ public class GameManager : MonoBehaviour
         Enemieskilled_Win.text = EnemiesKilled.ToString();
         Score_Lose.text = PlayerScore.ToString();
         Score_Win.text = PlayerScore.ToString();
+        Multiplier_Text.text = Multiplier.ToString();
 
         PlayerHealth = PlayerScript.Health;
         if(PlayerHealth <= 0 || ShipHP.Health <= 0)//lose conditions
