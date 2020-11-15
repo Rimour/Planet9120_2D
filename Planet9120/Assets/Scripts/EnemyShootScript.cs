@@ -75,7 +75,7 @@ public class EnemyShootScript : MonoBehaviour
     void shoot()
     {
                 GameObject BulletIns = Instantiate(Bullet, Shootpoint.position, Quaternion.identity);
-                BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+               // BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
                // SoundManager.PlaySound("TowerShoot");
                // attackTimer = 0;
     }
