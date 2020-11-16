@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
     public float Health = 30;
     public float Oxygen = 200;
+    public Text ShipStatus;
 
     private bool bPlayerInRange;
 
@@ -26,6 +28,7 @@ public class Ship : MonoBehaviour
         }
 
         Manager.ShipCount = (int)Health;
+        ShipStatus.text = Mathf.Round(Health).ToString() + " %";
     }
     private void OnTriggerStay2D(Collider2D other)
     {

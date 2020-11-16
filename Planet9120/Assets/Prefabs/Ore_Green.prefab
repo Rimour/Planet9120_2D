@@ -124,3 +124,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResourceGained: 10
   RespawnTime: 5
+  bIsGold: 0

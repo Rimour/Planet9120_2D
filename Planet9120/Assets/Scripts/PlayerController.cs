@@ -38,8 +38,10 @@ public class PlayerController : MonoBehaviour
 
     public float ShipResources;
 
-    public Slider HPBar;
-    public Slider OxyBar;
+    //public Slider HPBar;
+    //public Slider OxyBar;
+    public Text HPText;
+    public Text O2Text;
 
     private const float coef = 5f;
 
@@ -51,8 +53,8 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-       HPBar.maxValue = Health;
-       OxyBar.maxValue = Oxygen;
+       //HPBar.maxValue = Health;
+       //OxyBar.maxValue = Oxygen;
        manager = GameObject.Find("GameManager").GetComponent<GameManager>();// set game manager
        ship = GameObject.FindWithTag("Ship").GetComponent<Ship>();
     }
@@ -84,8 +86,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HPBar.value = Health;
-        OxyBar.value = Oxygen;
+        //HPBar.value = Health;
+        //OxyBar.value = Oxygen;
+        HPText.text = Mathf.Round(Health).ToString();
+        O2Text.text = Mathf.Round(Oxygen).ToString();
 
         manager.AmmoCount.text = weapon.bullets.ToString();
 

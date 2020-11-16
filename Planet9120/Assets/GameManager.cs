@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
     public GameObject PauseButtons;
     public GameObject SettingsPanel;
     public GameObject ControlsPanel;
-    public Slider ShipHPTracker;
-    public Slider ShipRepairTracker;
+    //public Slider ShipHPTracker;
+    //public Slider ShipRepairTracker;
     [Header("Player Abilities")]
     public Text Ab1Text;//ability 1 text slot
     public Text Ab2Text;//ability 2 text slot
@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour
         ShipHP = GameObject.Find("Ship2d").GetComponent<Ship>();
         Player = GameObject.FindWithTag("Player");
         PlayerScript = Player.GetComponent<PlayerController>();
-        ShipHPTracker.maxValue = ShipHP.Health;
-        ShipRepairTracker.maxValue = WinCondition;
+        //ShipHPTracker.maxValue = ShipHP.Health;
+        //ShipRepairTracker.maxValue = WinCondition;
         deathPanel.SetActive(false);
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.ForceSoftware);
     }
@@ -125,11 +125,11 @@ public class GameManager : MonoBehaviour
         //ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
         GoldResource.text = GoldResourceCount.ToString() + "/2";
 
-        ShipHPTracker.value = ShipHP.Health;
-        ShipRepairTracker.value = ShipCount;
+        //ShipHPTracker.value = ShipHP.Health;
+        //ShipRepairTracker.value = ShipCount;
 
         TimeSurvived += Time.deltaTime;
-        SurvivalTime_Lose.text = TimeSurvived.ToString();
+        SurvivalTime_Lose.text = Mathf.Round(TimeSurvived).ToString() + " sec";
         Enemieskilled_Lose.text = EnemiesKilled.ToString();
         Score.text = PlayerScore.ToString();
         SurvivalTime_Win.text = TimeSurvived.ToString();
@@ -153,11 +153,11 @@ public class GameManager : MonoBehaviour
             WinPanel.SetActive(true);
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && isPaused == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
         {
             PauseGame();
 
-        }else if (Input.GetKeyDown(KeyCode.Space) && isPaused == true)
+        }else if (Input.GetKeyDown(KeyCode.Escape) && isPaused == true)
         {
             ResumeGame();
         }
