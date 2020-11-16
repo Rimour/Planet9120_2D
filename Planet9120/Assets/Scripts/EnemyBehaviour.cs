@@ -67,7 +67,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Alive = false;
             manager.Multiplier += 1;
-            manager.PlayerScore += 10 * manager.Multiplier;
+            manager.PlayerScore += 5 * manager.Multiplier;
             manager.EnemiesKilled += 1;
             SoundManager.PlaySound("EnemyDeath");
             GameObject projectile = Instantiate(BloodSplat, EnemyDeath.position, EnemyDeath.rotation);

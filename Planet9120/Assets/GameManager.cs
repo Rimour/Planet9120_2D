@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     PlayerController PlayerScript;
-    GameObject Player;    
+    GameObject Player;
     float PlayerHealth;//player's health
-    
+
     public float WinCondition = 100;//amount needed to fix ship
     public int Count;//amount of resources collected by player
     public int ShipCount;// amount of resources in ship
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public float Multiplier = 1; // How many points the player has
 
     Ship ShipHP;
-    
+
     [Header("UI")]
     public Text ResourceBox;
     public Text GoldResource;
@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     public Text SurvivalTime_Win;
     public Text Score_Win;
     public Text Multiplier_Text;
+    public GameObject bronzemedal;
+    public GameObject silvermedal;
+    public GameObject goldmedal;
 
     // Start is called before the first frame update
     void Start()
@@ -118,6 +121,19 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
     
+//    public void medalsWon()
+ //   {
+   //     medals[0].SetActive(true);
+   //     if(PlayerScore >= 1000 && PlayerScore <= 2000)
+   //     {
+    //        medals[1].SetActive(true);
+    //    }
+   //     else if (PlayerScore >= 2001)
+   //     {
+   //         medals[1].SetActive(true);
+   //        medals[2].SetActive(true);
+   //     }
+   // }
 
     void Update()
     {      
@@ -150,6 +166,16 @@ public class GameManager : MonoBehaviour
         if(ShipCount >= WinCondition && GoldResourceCount>= GoldResourceWin)//win conditions 
         {
             Time.timeScale = 0f;
+            bronzemedal.SetActive(true);
+            if(PlayerScore >= 1500 && PlayerScore <= 3000)
+              {
+                   silvermedal.SetActive(true);
+              }
+            else if (PlayerScore >= 3001)
+            {
+                silvermedal.SetActive(true);
+                goldmedal.SetActive(true);  
+            }            
             WinPanel.SetActive(true);
         }
         
