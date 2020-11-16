@@ -120,20 +120,6 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-    
-//    public void medalsWon()
- //   {
-   //     medals[0].SetActive(true);
-   //     if(PlayerScore >= 1000 && PlayerScore <= 2000)
-   //     {
-    //        medals[1].SetActive(true);
-    //    }
-   //     else if (PlayerScore >= 2001)
-   //     {
-   //         medals[1].SetActive(true);
-   //        medals[2].SetActive(true);
-   //     }
-   // }
 
     void Update()
     {      
@@ -143,12 +129,11 @@ public class GameManager : MonoBehaviour
 
         //ShipHPTracker.value = ShipHP.Health;
         //ShipRepairTracker.value = ShipCount;
-
         TimeSurvived += Time.deltaTime;
         SurvivalTime_Lose.text = Mathf.Round(TimeSurvived).ToString() + " sec";
         Enemieskilled_Lose.text = EnemiesKilled.ToString();
         Score.text = PlayerScore.ToString();
-        SurvivalTime_Win.text = TimeSurvived.ToString();
+        SurvivalTime_Win.text = Mathf.Round(TimeSurvived).ToString() + " sec";
         Enemieskilled_Win.text = EnemiesKilled.ToString();
         Score_Lose.text = PlayerScore.ToString();
         Score_Win.text = PlayerScore.ToString();
