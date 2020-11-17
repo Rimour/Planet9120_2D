@@ -19,6 +19,9 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform EnemyDeath;
     Slider HPSlider;
 
+    private bool bIsAttackingPlayer;
+    private bool bIsAttackingShip;
+
     GameManager manager;//game manager
 
     public void Start()
@@ -31,6 +34,9 @@ public class EnemyBehaviour : MonoBehaviour
         HPSlider = GetComponentInChildren<Slider>();
         HPSlider.maxValue = MaxHP;
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();// set game manager
+
+        bIsAttackingPlayer = false;
+        bIsAttackingShip = false;
 
     }
     public void takeDamage(float damage)
@@ -84,4 +90,44 @@ public class EnemyBehaviour : MonoBehaviour
             CurrentHP -= 25;
         }
     }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            PlayerController PlayerRef = other.gameObject.GetComponent<PlayerController>();
+            StartCoroutine(DealingDamage(PlayerRef));
+        }
+
+        else if(other.gameObject.CompareTag("Ship"))
+        {
+            Ship ShipRef = other.gameObject.GetComponent<Ship>();
+            StartCoroutine(DealingDamage(ShipRef));
+        }
+    }
+
+    IEnumerator DealingDamage(PlayerController playerRef)
+    {
+        if(!bIsAttackingPlayer)
+        {
+            bIsAttackingPlayer = true;
+            playerRef.Health -= 50;
+            yield return new WaitForSeconds(1);
+            bIsAttackingPlayer = false;
+        }
+        
+    }
+
+    IEnumerator DealingDamage(Ship ShipRef)
+    {
+        if(!bIsAttackingShip)
+        {
+            bIsAttackingShip = true;
+            ShipRef.Health -= 5;
+            yield return new WaitForSecondsRealtime(1);
+            bIsAttackingShip = false;
+        }
+        
+    }
+
 }

@@ -22,10 +22,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
     private Vector2 mousePosition;
 
+    public float MaxHealth;
     public float Health;
     
     public float Resources;
     public float Oxygen;
+    public float MaxOxygen;
 
     private bool bInOxygenArea;
     private bool bAlreadyInOxygen;
@@ -224,8 +226,6 @@ public class PlayerController : MonoBehaviour
             //    break;
 
             case "Enemy":
-                Health -= 0.1f;
-                moveSpeed = 0;
                 manager.Multiplier = 1;
                 break;
 
@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour
         {
             bAlreadyInHealth = true;
             Health = Mathf.Clamp(Health + 10, 0, 100);
-            TowerRef.HealthLevel = Mathf.Clamp(TowerRef.HealthLevel - 10, 0, 100);
+            TowerRef.HealthLevel = Mathf.Clamp(TowerRef.HealthLevel - 10, 0, MaxHealth);
 
             yield return new WaitForSecondsRealtime(1f);
             bAlreadyInHealth = false;
@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
         {
             bAlreadyInOxygen = true;
             Oxygen = Mathf.Clamp(Oxygen + 10, 0, 100);    
-            TowerRef.oxygenLevel = Mathf.Clamp(TowerRef.oxygenLevel - 10, 0, 100);
+            TowerRef.oxygenLevel = Mathf.Clamp(TowerRef.oxygenLevel - 10, 0, MaxOxygen);
 
             yield return new WaitForSecondsRealtime(1f);
             bAlreadyInOxygen = false;

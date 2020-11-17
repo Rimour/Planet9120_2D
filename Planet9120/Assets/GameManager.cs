@@ -23,6 +23,17 @@ public class GameManager : MonoBehaviour
     Ship ShipHP;
 
     [Header("UI")]
+
+    bool SizeCalled;
+    int Direction;
+
+
+
+    public Text CurrentWave;
+    public Text ShipWarning;
+    public Image BloodScreen;
+    public Image OxygenScreen;
+
     public Text ResourceBox;
     public Text GoldResource;
     public Text AmmoCount;
@@ -121,8 +132,84 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void UpdateWave(int currentWave)
+    {
+        CurrentWave.text = currentWave + " ";
+    }
+
+    //Handling the player warnings for oxygen, health and ship health
+    public void UpdateWarnings()
+    {
+
+        if (ShipCount < 10)
+        {
+            ShipWarning.gameObject.SetActive(true);
+
+
+            StartCoroutine(WarningSize());
+        }
+
+        else
+        {
+            SizeCalled = false;
+            ShipWarning.gameObject.SetActive(false);
+        }
+
+
+        if ((PlayerScript.Health / PlayerScript.MaxHealth) < .5f)
+        {
+            var tempColor = BloodScreen.color;
+            tempColor.a = ((PlayerScript.Health / PlayerScript.MaxHealth) - 1) * (-1); //Setting the alpha of the screen effect based on the ratio of current health and max health
+            BloodScreen.color = tempColor;
+            tempColor.a = 0;
+            OxygenScreen.color = tempColor; //Making sure the oxygen screen isn't seen when the blood screen is active
+        }
+
+        else if ((PlayerScript.Oxygen / PlayerScript.MaxOxygen) < .5f)
+        {
+            var tempColor = OxygenScreen.color;
+            tempColor.a = ((PlayerScript.Oxygen / PlayerScript.MaxOxygen) - 1) * (-1); //Setting the alpha of the screen effect based on the ratio of current oxygen and max oxygen
+            OxygenScreen.color = tempColor;
+        }
+    }
+
+    IEnumerator WarningSize()
+    {
+        //if (!SizeCalled)
+        //{
+        //    SizeCalled = true;
+        //    ShipWarning.gameObject.SetActive(true);
+        //    yield return new WaitForSecondsRealtime(5);
+
+        //    ShipWarning.gameObject.SetActive(false);
+        //}
+        if (!SizeCalled)
+        {
+            SizeCalled = true;
+            yield return new WaitForSecondsRealtime(.03f);
+
+
+
+            if (ShipWarning.fontSize >= 15)
+            {
+                Direction = -1;
+            }
+
+            else if (ShipWarning.fontSize <= 1)
+            {
+                Direction = 1;
+            }
+
+            ShipWarning.fontSize += Direction;
+
+            SizeCalled = false;
+        }
+    }
+
     void Update()
-    {      
+    {
+        UpdateWarnings();
+
         ResourceBox.text = Count.ToString();
         //ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
         GoldResource.text = GoldResourceCount.ToString() + "/2";
