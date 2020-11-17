@@ -70,7 +70,7 @@ public class NewSpawner : MonoBehaviour
         while(NumberOfEnemies < MaxAmount)
         {
             yield return new WaitForSecondsRealtime(TimeBetweenSpawn);
-            Instantiate(EnemyPrefabs[Random.Range(0, 3)], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            Instantiate(EnemyPrefabs[Random.Range(0, 4)], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             NumberOfEnemies++;
             Debug.Log("EnemySpawned");
         }

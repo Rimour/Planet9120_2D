@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
     public Text HPText;
     public Text O2Text;
 
-    private const float coef = 5f;
+    private const float coef = 2f;
+    private const float HealthCoef = 5f;
 
     GameManager manager;//game manager
     int CountdownTime1 = 5;
@@ -302,8 +303,8 @@ public class PlayerController : MonoBehaviour
         if (!bAlreadyInHealth)
         {
             bAlreadyInHealth = true;
-            Health = Mathf.Clamp(Health + 10, 0, 100);
-            TowerRef.HealthLevel = Mathf.Clamp(TowerRef.HealthLevel - 10, 0, MaxHealth);
+            Health = Mathf.Clamp(Health + 20, 0, MaxHealth);
+            TowerRef.HealthLevel = Mathf.Clamp(TowerRef.HealthLevel - 10, 0, 100);
 
             yield return new WaitForSecondsRealtime(1f);
             bAlreadyInHealth = false;
@@ -323,8 +324,8 @@ public class PlayerController : MonoBehaviour
         if (!bAlreadyInOxygen)
         {
             bAlreadyInOxygen = true;
-            Oxygen = Mathf.Clamp(Oxygen + 10, 0, 100);    
-            TowerRef.oxygenLevel = Mathf.Clamp(TowerRef.oxygenLevel - 10, 0, MaxOxygen);
+            Oxygen = Mathf.Clamp(Oxygen + 20, 0, MaxOxygen);    
+            TowerRef.oxygenLevel = Mathf.Clamp(TowerRef.oxygenLevel - 10, 0, 100);
 
             yield return new WaitForSecondsRealtime(1f);
             bAlreadyInOxygen = false;
@@ -426,7 +427,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Oxygen <= 0)
         {
-            Health -= coef * Time.deltaTime;
+            Health -= HealthCoef * Time.deltaTime;
         }
     }
 

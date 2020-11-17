@@ -155,6 +155,13 @@ public class GameManager : MonoBehaviour
             ShipWarning.gameObject.SetActive(false);
         }
 
+        if ((PlayerScript.Health / PlayerScript.MaxHealth) >= .5f)
+        {
+            var tempColor = BloodScreen.color;
+            tempColor.a = 0;
+            BloodScreen.color = tempColor;
+        }
+
 
         if ((PlayerScript.Health / PlayerScript.MaxHealth) < .5f)
         {
@@ -169,6 +176,13 @@ public class GameManager : MonoBehaviour
         {
             var tempColor = OxygenScreen.color;
             tempColor.a = ((PlayerScript.Oxygen / PlayerScript.MaxOxygen) - 1) * (-1); //Setting the alpha of the screen effect based on the ratio of current oxygen and max oxygen
+            OxygenScreen.color = tempColor;
+        }
+
+        else if((PlayerScript.Oxygen / PlayerScript.MaxOxygen) >= .5f)
+        {
+            var tempColor = OxygenScreen.color;
+            tempColor.a = 0;
             OxygenScreen.color = tempColor;
         }
     }
