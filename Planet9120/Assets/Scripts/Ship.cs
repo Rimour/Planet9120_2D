@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
-    public float Health = 30;
+    public float Health = 100;
+    float HealthToDisplay;
     public float Oxygen = 200;
     public Text ShipStatus;
 
@@ -22,19 +23,27 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Health <= 0)
-        {
-            Debug.Log("Player Loses");
-        }
+
+        HealthToDisplay = Mathf.Floor((Health / Manager.WinCondition) *100);
 
         Manager.ShipCount = (int)Health;
-        ShipStatus.text = Mathf.Round(Health).ToString() + " %";
+        if(HealthToDisplay > 100)
+        {
+            HealthToDisplay = 100;
+        }
+
+        if (Health <= 0)
+        {
+            HealthToDisplay = 0;
+        }
+
+        ShipStatus.text = HealthToDisplay + " %";
     }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Health -= Time.deltaTime;
+          //  Health -= Time.deltaTime;
         }
     }
 

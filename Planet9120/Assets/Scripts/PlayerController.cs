@@ -154,9 +154,12 @@ public class PlayerController : MonoBehaviour
             case "Ship":
                 //ShipResources += Resources;
                 //manager.ShipCount += manager.Count;
+                if (ship.Health < manager.WinCondition)
+                {
+                    ship.Health += manager.Count;
+                    manager.Count = 0;
+                }
                 
-                ship.Health += manager.Count;
-                manager.Count = 0;
 
                 //Resources = 0;
                 bInOxygenArea = true;
@@ -409,10 +412,10 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnAmmoTower()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha5) && manager.Count >= 1)
+        if (Input.GetKeyDown(KeyCode.Alpha5) && manager.Count >= 30)
         {
             //Debug.Log("Q key was pressed.");
-            manager.Count -= 1;
+            manager.Count -= 30;
             SoundManager.PlaySound("PlaceTower");
             GameObject projectile = Instantiate(AmmoTower, TowerPlacement.position, TowerPlacement.rotation);
         }
@@ -425,7 +428,8 @@ public class PlayerController : MonoBehaviour
         {
             Oxygen -= coef * Time.deltaTime;
         }
-        if (Oxygen <= 0)
+
+        else if (Oxygen < 0)
         {
             Health -= HealthCoef * Time.deltaTime;
         }

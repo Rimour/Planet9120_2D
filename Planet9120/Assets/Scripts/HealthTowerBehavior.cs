@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthTowerBehavior : MonoBehaviour
 {
-    public float HealthLevel = 30;
+    public float HealthLevel = 100;
     private bool bPlayerInRange = false;
 
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class HealthTowerBehavior : MonoBehaviour
     {
         if (!bPlayerInRange)
         {
-            HealthLevel = Mathf.Clamp(HealthLevel + 5, 0, 100);
+            HealthLevel = Mathf.Clamp(HealthLevel + 10, 0, 100);
             Debug.Log("Oxygen tower went up");
         }
 
@@ -54,7 +54,6 @@ public class HealthTowerBehavior : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         string OtherTag = other.gameObject.tag;
-        Debug.Log(OtherTag);
 
         if (OtherTag == "Player")
         {

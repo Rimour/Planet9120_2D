@@ -111,7 +111,7 @@ public class EnemyBehaviour : MonoBehaviour
         if(!bIsAttackingPlayer)
         {
             bIsAttackingPlayer = true;
-            playerRef.Health -= 50;
+            playerRef.Health -= 20;
             yield return new WaitForSeconds(1);
             bIsAttackingPlayer = false;
         }

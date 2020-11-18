@@ -22,12 +22,14 @@ public class GameManager : MonoBehaviour
 
     Ship ShipHP;
 
-    [Header("UI")]
-
     bool SizeCalled;
     int Direction;
 
+    int minutes;
+    int hours;
+    float seconds;
 
+    [Header("UI")]
 
     public Text CurrentWave;
     public Text ShipWarning;
@@ -224,6 +226,16 @@ public class GameManager : MonoBehaviour
     {
         UpdateWarnings();
 
+        PlayerHealth = PlayerScript.Health;
+        if (PlayerHealth <= 0 || ShipHP.Health <= 0)//lose conditions
+        {
+            Time.timeScale = 0f;
+            deathPanel.SetActive(true);
+            HighScoreChecking();
+            //Debug.Log("You lose");
+            //death
+        }
+
         ResourceBox.text = Count.ToString();
         //ShipResourceBox.text = ShipCount.ToString() + " / " + WinCondition.ToString();
         GoldResource.text = GoldResourceCount.ToString() + "/2";
@@ -231,7 +243,15 @@ public class GameManager : MonoBehaviour
         //ShipHPTracker.value = ShipHP.Health;
         //ShipRepairTracker.value = ShipCount;
         TimeSurvived += Time.deltaTime;
-        SurvivalTime_Lose.text = Mathf.Round(TimeSurvived).ToString() + " sec";
+        seconds += Time.deltaTime;
+        if(TimeSurvived >= 60)
+        {
+            minutes++;
+            TimeSurvived = 0;
+        }
+
+        //hours = (int)minutes % 60;
+        SurvivalTime_Lose.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// + " sec";
         Enemieskilled_Lose.text = EnemiesKilled.ToString();
         Score.text = PlayerScore.ToString();
         SurvivalTime_Win.text = Mathf.Round(TimeSurvived).ToString() + " sec";
@@ -240,14 +260,6 @@ public class GameManager : MonoBehaviour
         Score_Win.text = PlayerScore.ToString();
         Multiplier_Text.text = Multiplier.ToString();
 
-        PlayerHealth = PlayerScript.Health;
-        if(PlayerHealth <= 0 || ShipHP.Health <= 0)//lose conditions
-        {
-            Time.timeScale = 0f;
-            deathPanel.SetActive(true);
-            Debug.Log("You lose");
-            //death
-        }
         
         if(ShipCount >= WinCondition && GoldResourceCount>= GoldResourceWin)//win conditions 
         {
@@ -269,10 +281,21 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
 
-        }else if (Input.GetKeyDown(KeyCode.Escape) && isPaused == true)
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused == true)
         {
             ResumeGame();
         }
+    }
+
+    void HighScoreChecking()
+    {
+        if(seconds > PlayerPrefs.GetFloat("HighScore", 0))
+        {
+            PlayerPrefs.SetFloat("HighScore", seconds);
+        }
+
+        SurvivalTime_Lose.text = PlayerPrefs.GetFloat("HighScore", 0).ToString();
     }
 
     

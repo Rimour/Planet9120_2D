@@ -66,16 +66,16 @@ public class NewSpawner : MonoBehaviour
 
     IEnumerator SpawnNewWave()
     {
+        yield return new WaitForSecondsRealtime(10);
 
         while(NumberOfEnemies < MaxAmount)
         {
             yield return new WaitForSecondsRealtime(TimeBetweenSpawn);
             Instantiate(EnemyPrefabs[Random.Range(0, 4)], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             NumberOfEnemies++;
-            Debug.Log("EnemySpawned");
         }
 
-            StartCoroutine(LookForEnemies());
+            StartCoroutine(StartNewWave());
        
 
     }
@@ -83,11 +83,11 @@ public class NewSpawner : MonoBehaviour
 
     IEnumerator StartNewWave()
     {
-        Debug.Log("New wave was called");
         yield return new WaitForSecondsRealtime(TimeBetweenWaves);
         CurrentWave++;
         MaxAmount += 1;
         NumberOfEnemies = 0;
+        TimeBetweenWaves += 20;
         Manager.UpdateWave(CurrentWave);
         StartCoroutine(SpawnNewWave());
     }
