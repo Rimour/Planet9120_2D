@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OxygenTowerBehavior : MonoBehaviour
 {
     public float oxygenLevel = 30;
     private bool bPlayerInRange = false;
+    public Text OxygenCounter;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(RefillOxygen());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        OxygenCounter.text = oxygenLevel.ToString();
     }
 
     IEnumerator RefillOxygen()

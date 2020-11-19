@@ -9,6 +9,7 @@ public class Ship : MonoBehaviour
     float HealthToDisplay;
     public float Oxygen = 200;
     public Text ShipStatus;
+    public Text ShipOxygen;
 
     private bool bPlayerInRange;
 
@@ -38,6 +39,8 @@ public class Ship : MonoBehaviour
         }
 
         ShipStatus.text = HealthToDisplay + " %";
+
+        ShipOxygen.text = Oxygen.ToString();
     }
     private void OnTriggerStay2D(Collider2D other)
     {
