@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     public Text CurrentWave;
     public Text ShipWarning;
-    public Text Grenades;
     public Image BloodScreen;
     public Image OxygenScreen;
 
@@ -58,7 +57,6 @@ public class GameManager : MonoBehaviour
     public Text Score;
     public Text Enemieskilled_Lose;
     public Text SurvivalTime_Lose;
-    public Text HighScore_Text;
     public Text Score_Lose;
     public Text Enemieskilled_Win;
     public Text SurvivalTime_Win;
@@ -145,7 +143,7 @@ public class GameManager : MonoBehaviour
     public void UpdateWarnings()
     {
 
-        if (ShipCount < 30)
+        if (ShipCount < 10)
         {
             ShipWarning.gameObject.SetActive(true);
 
@@ -256,7 +254,7 @@ public class GameManager : MonoBehaviour
         SurvivalTime_Lose.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// + " sec";
         Enemieskilled_Lose.text = EnemiesKilled.ToString();
         Score.text = PlayerScore.ToString();
-        SurvivalTime_Win.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// Mathf.Round(TimeSurvived).ToString() + " sec";
+        SurvivalTime_Win.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// + " sec";
         Enemieskilled_Win.text = EnemiesKilled.ToString();
         Score_Lose.text = PlayerScore.ToString();
         Score_Win.text = PlayerScore.ToString();
@@ -267,18 +265,16 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             bronzemedal.SetActive(true);
-            if(PlayerScore >= 1500 && PlayerScore <= 3000)
-              {
+            if(PlayerScore >= 3000 || TimeSurvived <= 180)
+                {
                    silvermedal.SetActive(true);
-              }
-            else if (PlayerScore >= 3001)
+                }
+            if (PlayerScore >= 3000 && TimeSurvived <= 180)
             {
                 silvermedal.SetActive(true);
                 goldmedal.SetActive(true);  
             }            
             WinPanel.SetActive(true);
-
-            HighScoreChecking();
         }
         
         if (Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
@@ -297,11 +293,9 @@ public class GameManager : MonoBehaviour
         if(seconds > PlayerPrefs.GetFloat("HighScore", 0))
         {
             PlayerPrefs.SetFloat("HighScore", seconds);
-            PlayerPrefs.SetFloat("HighMinutes", minutes);
         }
 
-
-        HighScore_Text.text = (PlayerPrefs.GetFloat("HighMinutes", 0).ToString("00")) + ":" + (PlayerPrefs.GetFloat("HighScore", 0)%60).ToString("00");
+        SurvivalTime_Lose.text = PlayerPrefs.GetFloat("HighScore", 0).ToString();
     }
 
     
