@@ -261,6 +261,7 @@ public class PlayerController : MonoBehaviour
 
             case "AmmoTower":
                 weapon.bullets = 99;
+                SoundManager.PlaySound("ReloadSFX");
                 break;
 
             default:

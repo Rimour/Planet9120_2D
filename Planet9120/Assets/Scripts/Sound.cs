@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip ResourceSound, ShootSound, TowerShoot, TowerPlace, Mine, EnemyDeath, ShipRepairSFX, MineSFX, DashSFX, PlayerHitSFX;
+    public static AudioClip ResourceSound, ShootSound, TowerShoot, TowerPlace, Mine, EnemyDeath, ShipRepairSFX, MineSFX, DashSFX, PlayerHitSFX, ReloadSFX;
     static AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
         MineSFX = Resources.Load<AudioClip>("MineSFX");
         DashSFX = Resources.Load<AudioClip>("DashSFX");
         PlayerHitSFX = Resources.Load<AudioClip>("PlayerHitSFX");
+        ReloadSFX = Resources.Load<AudioClip>("ReloadSFX");
 
         audioSrc = GetComponent<AudioSource>();
 
@@ -63,7 +64,9 @@ public class SoundManager : MonoBehaviour
             case "PlayerHitSFX":
                 audioSrc.PlayOneShot(PlayerHitSFX);
                 break;
-
+            case "ReloadSFX":
+                audioSrc.PlayOneShot(ReloadSFX);
+                break;
         }
     }
         
