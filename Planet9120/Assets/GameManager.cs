@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public Text CurrentWave;
     public Text ShipWarning;
+    public Text Grenades;
     public Image BloodScreen;
     public Image OxygenScreen;
 
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
     public Text Score;
     public Text Enemieskilled_Lose;
     public Text SurvivalTime_Lose;
+    public Text HighScore_Text;
     public Text Score_Lose;
     public Text Enemieskilled_Win;
     public Text SurvivalTime_Win;
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour
     public void UpdateWarnings()
     {
 
-        if (ShipCount < 10)
+        if (ShipCount < 30)
         {
             ShipWarning.gameObject.SetActive(true);
 
@@ -254,7 +256,7 @@ public class GameManager : MonoBehaviour
         SurvivalTime_Lose.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// + " sec";
         Enemieskilled_Lose.text = EnemiesKilled.ToString();
         Score.text = PlayerScore.ToString();
-        SurvivalTime_Win.text = Mathf.Round(TimeSurvived).ToString() + " sec";
+        SurvivalTime_Win.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// Mathf.Round(TimeSurvived).ToString() + " sec";
         Enemieskilled_Win.text = EnemiesKilled.ToString();
         Score_Lose.text = PlayerScore.ToString();
         Score_Win.text = PlayerScore.ToString();
@@ -275,6 +277,8 @@ public class GameManager : MonoBehaviour
                 goldmedal.SetActive(true);  
             }            
             WinPanel.SetActive(true);
+
+            HighScoreChecking();
         }
         
         if (Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
@@ -293,9 +297,11 @@ public class GameManager : MonoBehaviour
         if(seconds > PlayerPrefs.GetFloat("HighScore", 0))
         {
             PlayerPrefs.SetFloat("HighScore", seconds);
+            PlayerPrefs.SetFloat("HighMinutes", minutes);
         }
 
-        SurvivalTime_Lose.text = PlayerPrefs.GetFloat("HighScore", 0).ToString();
+
+        HighScore_Text.text = (PlayerPrefs.GetFloat("HighMinutes", 0).ToString("00")) + ":" + (PlayerPrefs.GetFloat("HighScore", 0)%60).ToString("00");
     }
 
     

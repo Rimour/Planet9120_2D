@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
 
+    public GameObject Grenade;
+    public float GrenadeStrenght;
+
     public GameObject AttackTower;
     public GameObject LongTower;
     public GameObject OxygenTower;
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public float Ability1Cooldown = 0;
     public float Ability1UseTime = 0;
     public float Ability2Cooldown = 0;
+
+    public int GrenadeCount = 1;
 
     public float ShipResources;
 
@@ -95,6 +100,7 @@ public class PlayerController : MonoBehaviour
         O2Text.text = Mathf.Round(Oxygen).ToString();
 
         manager.AmmoCount.text = weapon.bullets.ToString();
+        manager.Grenades.text = GrenadeCount + "/3";
 
         Ability2Cooldown += Time.deltaTime;
         Ability1Cooldown += Time.deltaTime;
@@ -185,6 +191,11 @@ public class PlayerController : MonoBehaviour
                 Health -= 10f;
                 break;
 
+            case "AmmoTower":
+                weapon.bullets = 99;
+                GrenadeCount = 3;
+                break;
+
         }
 
     }
@@ -257,9 +268,9 @@ public class PlayerController : MonoBehaviour
             //    // SoundManager.PlaySound("ShipFix");
             //    break;
 
-            case "AmmoTower":
-                weapon.bullets = 99;
-                break;
+            //case "AmmoTower":
+            //    weapon.bullets = 99;
+            //    break;
 
             default:
                 //Debug.Log("No tag matched");
@@ -475,6 +486,16 @@ public class PlayerController : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (GrenadeCount > 0)
+            {
+                GrenadeCount--;
+                GameObject SpawnedGrenade = Instantiate(Grenade, new Vector3(transform.position.x, transform.position.y, transform.position.z), this.transform.rotation);
+                SpawnedGrenade.GetComponent<Rigidbody2D>().AddForce(this.transform.up * GrenadeStrenght, ForceMode2D.Impulse);
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!weapon.bIsShooting)
@@ -483,11 +504,9 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(weapon.Firing());
                // weapon.Fire();
             }
-
-            
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             weapon.bIsShooting = false;
         }

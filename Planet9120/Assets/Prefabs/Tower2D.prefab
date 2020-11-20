@@ -218,6 +218,7 @@ MonoBehaviour:
   Shootpoint: {fileID: 6473245623366170012}
   Force: 300
   Health: 100
+  Ammo: 20
 --- !u!61 &6473245623681830863
 BoxCollider2D:
   m_ObjectHideFlags: 0

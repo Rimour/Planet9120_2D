@@ -7,6 +7,7 @@ public class AmmoTower : MonoBehaviour
 {
     public Text AmmoCount;
     public int AmmoUses = 4;
+    bool bCanRefill = true;
     
     public void Update()
     {
@@ -15,8 +16,10 @@ public class AmmoTower : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player" && AmmoUses > 0)
+        if(other.tag == "Player" && AmmoUses > 0 && bCanRefill)
         {
+            bCanRefill = false;
+            StartCoroutine(ResetRefill());
             AmmoUses--;
             if(AmmoUses == 0)
             {
@@ -24,5 +27,11 @@ public class AmmoTower : MonoBehaviour
             }
         }
 
+    }
+
+    IEnumerator ResetRefill()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        bCanRefill = true;
     }
 }

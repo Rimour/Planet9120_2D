@@ -17,6 +17,7 @@ public class TowerScript : MonoBehaviour
     public Transform Shootpoint;
     public float Force;
     public float Health;
+    public int Ammo;
 
     // Start is called before the first frame update
     void Start()
@@ -74,9 +75,15 @@ public class TowerScript : MonoBehaviour
                 GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
                 BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
                 SoundManager.PlaySound("TowerShoot");
+                Ammo--;
                 CanAttack = false;
             }
          
+        }
+
+        if(Ammo < 0)
+        {
+            Destroy(this.gameObject);
         }
     }
     private void OnDrawGizmosSelected()

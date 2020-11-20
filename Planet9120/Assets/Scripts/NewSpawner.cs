@@ -85,7 +85,7 @@ public class NewSpawner : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(TimeBetweenWaves);
         CurrentWave++;
-        MaxAmount += 1;
+        MaxAmount += 2;
         NumberOfEnemies = 0;
         TimeBetweenWaves += 20;
         Manager.UpdateWave(CurrentWave);
