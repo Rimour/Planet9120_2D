@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5681087651143129699}
   - component: {fileID: 4243138011679267596}
   - component: {fileID: 5707089611961891853}
+  - component: {fileID: -6768547769625930211}
   m_Layer: 0
   m_Name: AmmoTower
   m_TagString: AmmoTower
@@ -99,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.000000014901161}
+  m_Offset: {x: 0.0012257397, y: 0.0024514794}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,8 +111,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5282309, y: 0.51793814}
+  m_Size: {x: 0.3541754, y: 0.5130352}
   m_EdgeRadius: 0
+--- !u!114 &-6768547769625930211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286045382129044975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7551df4b5929d1844966994a8ad3d6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmmoCount: {fileID: 3013831275960381719}
+  AmmoUses: 4
 --- !u!1 &926692998931488654
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +138,7 @@ GameObject:
   - component: {fileID: 578460621033063710}
   - component: {fileID: 6285339356797385950}
   m_Layer: 0
-  m_Name: Range
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +220,7 @@ GameObject:
   - component: {fileID: 6522272062291493408}
   - component: {fileID: 7171074562162036402}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: EffectRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

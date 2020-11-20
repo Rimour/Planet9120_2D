@@ -395,7 +395,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Q key was pressed.");
             manager.Count -= 5;
             SoundManager.PlaySound("PlaceTower");
-            GameObject projectile = Instantiate(OxygenTower, TowerPlacement.position, TowerPlacement.rotation);
+            GameObject projectile = Instantiate(OxygenTower, TowerPlacement.position, Quaternion.identity);
         }
     }
 
@@ -406,7 +406,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Q key was pressed.");
             manager.Count -= 10;
             SoundManager.PlaySound("PlaceTower");
-            GameObject projectile = Instantiate(HealthTower, TowerPlacement.position, TowerPlacement.rotation);
+            GameObject projectile = Instantiate(HealthTower, TowerPlacement.position, Quaternion.identity);
         }
     }
 
@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Q key was pressed.");
             manager.Count -= 30;
             SoundManager.PlaySound("PlaceTower");
-            GameObject projectile = Instantiate(AmmoTower, TowerPlacement.position, TowerPlacement.rotation);
+            GameObject projectile = Instantiate(AmmoTower, TowerPlacement.position, Quaternion.identity);
         }
     }
 

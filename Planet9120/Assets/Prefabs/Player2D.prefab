@@ -110,15 +110,17 @@ MonoBehaviour:
   Mine: {fileID: 1600299397324241065, guid: 42b6ae88a9c6ab54ba23eb59972d7617, type: 3}
   AmmoTower: {fileID: 0}
   TowerPlacement: {fileID: 9048647785905108003}
+  MaxHealth: 0
   Health: 100
   Resources: 0
   Oxygen: 100
+  MaxOxygen: 0
   Ability1Cooldown: 0
   Ability1UseTime: 0
   Ability2Cooldown: 0
   ShipResources: 0
-  HPBar: {fileID: 0}
-  OxyBar: {fileID: 0}
+  HPText: {fileID: 0}
+  O2Text: {fileID: 0}
 --- !u!50 &9048647785552116684
 Rigidbody2D:
   serializedVersion: 4
@@ -216,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9048647785905108002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 0.25, z: 0}
+  m_LocalPosition: {x: -0.04, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9048647787234126324}
