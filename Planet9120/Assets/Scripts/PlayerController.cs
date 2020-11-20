@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
                 {
                     ship.Health += manager.Count;
                     manager.Count = 0;
+                    SoundManager.PlaySound("ShipRepairSFX");
                 }
                 
 
@@ -183,6 +184,7 @@ public class PlayerController : MonoBehaviour
 
             case "EnemyProjectile":
                 Health -= 10f;
+                SoundManager.PlaySound("PlayerHitSFX");
                 break;
 
         }
@@ -445,6 +447,7 @@ public class PlayerController : MonoBehaviour
                 Ability1UseTime = 0;
                 CountdownTime1 = 5;//sets start time for ability countdown
                 StartCoroutine(Ability1Tracker());//displays countdown for ability
+                SoundManager.PlaySound("DashSFX");
 
 
         }
@@ -459,6 +462,7 @@ public class PlayerController : MonoBehaviour
                 GameObject projectile = Instantiate(Mine, TowerPlacement.position, TowerPlacement.rotation);
                 Ability2Cooldown = 0;
                 CountdownTime2 = 5;//sets start time for ability countdown
+                SoundManager.PlaySound("MineSFX");
                 StartCoroutine(Ability2Tracker());//displays countdown for ability
             }       
         }

@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour
         SurvivalTime_Lose.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// + " sec";
         Enemieskilled_Lose.text = EnemiesKilled.ToString();
         Score.text = PlayerScore.ToString();
-        SurvivalTime_Win.text = Mathf.Round(TimeSurvived).ToString() + " sec";
+        SurvivalTime_Win.text = minutes + ":" + Mathf.Round(TimeSurvived).ToString("00");// + " sec";
         Enemieskilled_Win.text = EnemiesKilled.ToString();
         Score_Lose.text = PlayerScore.ToString();
         Score_Win.text = PlayerScore.ToString();
@@ -265,11 +265,11 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             bronzemedal.SetActive(true);
-            if(PlayerScore >= 1500 && PlayerScore <= 3000)
-              {
+            if(PlayerScore >= 3000 || TimeSurvived <= 180)
+                {
                    silvermedal.SetActive(true);
-              }
-            else if (PlayerScore >= 3001)
+                }
+            if (PlayerScore >= 3000 && TimeSurvived <= 180)
             {
                 silvermedal.SetActive(true);
                 goldmedal.SetActive(true);  
