@@ -19,6 +19,7 @@ public class Ship : MonoBehaviour
     void Start()
     {
         Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        StartCoroutine(RefillOxygen());
     }
 
     // Update is called once per frame
@@ -77,7 +78,7 @@ public class Ship : MonoBehaviour
     {
         if (!bPlayerInRange)
         {
-            Oxygen = Mathf.Clamp(Oxygen + 5, 0, 100);
+            Oxygen = Mathf.Clamp(Oxygen + 5, 0, 200);
         }
 
         yield return new WaitForSecondsRealtime(1f);

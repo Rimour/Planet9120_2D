@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
                 {
                     ship.Health += manager.Count;
                     manager.Count = 0;
+                    SoundManager.PlaySound("ShipRepairSFX");
                 }
                 
 
@@ -189,11 +190,13 @@ public class PlayerController : MonoBehaviour
 
             case "EnemyProjectile":
                 Health -= 10f;
+                SoundManager.PlaySound("PlayerHitSFX");
                 break;
 
             case "AmmoTower":
                 weapon.bullets = 99;
                 GrenadeCount = 3;
+                SoundManager.PlaySound("ReloadSFX");
                 break;
 
         }
@@ -361,7 +364,7 @@ public class PlayerController : MonoBehaviour
         {
             bAlreadyInOxygen = true;
             Oxygen = Mathf.Clamp(Oxygen + 10, 0, 100);
-            ShipRef.Oxygen = Mathf.Clamp(ShipRef.Oxygen - 10, 0, 100);
+            ShipRef.Oxygen = Mathf.Clamp(ShipRef.Oxygen - 10, 0, 200);
 
             yield return new WaitForSecondsRealtime(1f);
             bAlreadyInOxygen = false;
@@ -456,7 +459,7 @@ public class PlayerController : MonoBehaviour
                 Ability1UseTime = 0;
                 CountdownTime1 = 5;//sets start time for ability countdown
                 StartCoroutine(Ability1Tracker());//displays countdown for ability
-
+                SoundManager.PlaySound("DashSFX");
 
         }
     }
@@ -471,6 +474,7 @@ public class PlayerController : MonoBehaviour
                 Ability2Cooldown = 0;
                 CountdownTime2 = 5;//sets start time for ability countdown
                 StartCoroutine(Ability2Tracker());//displays countdown for ability
+                SoundManager.PlaySound("MineSFX");
             }       
         }
     }

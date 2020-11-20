@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
 
+    public Text Grenades;
+
     public Text CurrentWave;
     public Text ShipWarning;
     public Image BloodScreen;

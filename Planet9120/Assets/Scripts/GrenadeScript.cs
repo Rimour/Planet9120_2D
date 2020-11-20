@@ -21,7 +21,7 @@ public class GrenadeScript : MonoBehaviour
 
     IEnumerator Explode()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(2);
         bExploded = true;
         GameObject Effect = Instantiate(Explosion, ExplosionTransform.position, ExplosionTransform.rotation);
         Destroy(this.gameObject);
